@@ -21,15 +21,13 @@ const App = () => {
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <header>{<Header />}</header>
-        <div className="heading">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/order-online" element={<Order />} />
-            <Route path="/book-table" element={<Book />} />
-            <Route path="/event-inquiry" element={<Inquiry />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/order-online" element={<Order />} />
+          <Route path="/book-table" element={<Book />} />
+          <Route path="/event-inquiry" element={<Inquiry />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </QueryClientProvider>
     </BrowserRouter>
   );
