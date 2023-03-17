@@ -1,6 +1,6 @@
 import React from "react";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
-
+import styled from "styled-components";
 const StarRating = ({ rating }) => {
   const fullStars = Math.floor(rating);
   const halfStar = rating - fullStars >= 0.5 ? 1 : 0;
@@ -19,7 +19,12 @@ const StarRating = ({ rating }) => {
     stars.push(<BsStar key={i + fullStars + halfStar} />);
   }
 
-  return <div className="star-rating">{stars}</div>;
+  return <Star className="star-rating">{stars}</Star>;
 };
-
+const Star = styled.div`
+  color: #e8522a;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+`;
 export default StarRating;

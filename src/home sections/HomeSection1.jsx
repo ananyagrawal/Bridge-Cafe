@@ -1,9 +1,12 @@
+import styles from "./Section1.module.css";
 const HomeSection1 = () => {
   return (
-    <div className="home-section-1">
-      <div className="top-border"></div>
-      <div className="welcome-heading">Welcome to Divine Bridge Cafe</div>
-      <div className="welcome-desc">
+    <div className={styles.section_container}>
+      <div className={styles.top_border}></div>
+      <div className={styles.welcome_heading}>
+        Welcome to Divine Bridge Cafe
+      </div>
+      <div className={styles.welcome_desc}>
         Divine Bridge Cafe strives to bring Indian cuisine back “in-vogue”. It
         amalgamates traditional global with Indian influences and classics,
         contemporary presentations, culinary styles and ambiance. Endaevours to

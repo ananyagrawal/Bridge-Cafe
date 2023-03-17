@@ -1,6 +1,7 @@
+import styles from "./Section3.module.css";
 const HomeSection3 = () => {
   return (
-    <div className="home-section-3">
+    <div className={styles.section_container}>
       <Section3
         heading="LOCATION"
         description="03, Neelkanth Road, Laxman Jhula, Rishikesh"
@@ -18,7 +19,7 @@ const HomeSection3 = () => {
 };
 const Section3 = (props) => {
   return (
-    <div className="section-3-container">
+    <div className={styles.section_sub_container}>
       <h2>{props.heading}</h2>
       <p>{props.description}</p>
     </div>

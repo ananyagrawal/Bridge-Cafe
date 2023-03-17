@@ -5,25 +5,26 @@ import { FaQuoteLeft } from "react-icons/fa";
 import { FaQuoteRight } from "react-icons/fa";
 import StarRating from "./StarRating";
 import { useState } from "react";
+import styles from "./Section5.module.css";
 const HomeSection5 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   return (
-    <div className="home-section-5">
-      <FaQuoteLeft size={40} className="quote-icon-left" />
-      <div className="review-container">
+    <div className={styles.section_container}>
+      <FaQuoteLeft size={40} className={styles.quote_left} />
+      <div className={styles.review_container}>
         <h1>What our customers are saying</h1>
-        <div className="person-container">
+        <div className={styles.person_container}>
           <img src={review[currentIndex].imag} alt="" />
-          <div className="name-container">
+          <div className={styles.name_container}>
             <h5>{review[currentIndex].name}</h5>
             <h6>{review[currentIndex].title}</h6>
           </div>
         </div>
-        <div className="review-desc-container">
+        <div className={styles.review_text_container}>
           <p>{review[currentIndex].description}</p>
           <StarRating rating={review[currentIndex].rating} />
         </div>
-        <div className="review-button-container">
+        <div className={styles.button_container}>
           <button
             onClick={() =>
               setCurrentIndex(
@@ -40,7 +41,7 @@ const HomeSection5 = () => {
           </button>
         </div>
       </div>
-      <FaQuoteRight size={40} className="quote-icon-right" />
+      <FaQuoteRight size={40} className={styles.quote_right} />
     </div>
   );
 };

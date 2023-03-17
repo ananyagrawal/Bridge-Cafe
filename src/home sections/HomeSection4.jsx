@@ -1,6 +1,7 @@
+import styles from "./Section4.module.css";
 const HomeSection4 = () => {
   return (
-    <div className="home-section-4">
+    <div className={styles.section_container}>
       <Section4
         heading="Food"
         description="Our curries are made out of fresh
@@ -23,8 +24,8 @@ as you get at home."
 };
 const Section4 = (props) => {
   return (
-    <div className="section-4-container">
-      <div className="section-4-subcontainer">
+    <div className={styles.section_sub_container}>
+      <div className={styles.text_container}>
         <h3>{props.heading}</h3>
         <p>{props.description}</p>
       </div>

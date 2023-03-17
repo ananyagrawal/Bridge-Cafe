@@ -1,0 +1,24 @@
+/* SECTION 3 */
+.section_container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 380px;
+  padding: 0 4rem;
+}
+.section_sub_container {
+  display: flex;
+  color: #153a35;
+  flex-direction: column;
+  gap: 1rem;
+  width: 13rem;
+  align-items: center;
+  text-align: center;
+}
+.section_sub_container h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+.section_sub_container:nth-child(2) {
+  margin-top: 6rem;
+}
