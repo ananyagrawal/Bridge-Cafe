@@ -151,6 +151,7 @@
   gap: 50px;
   text-align: center;
   align-items: center;
+  position: relative;
 }
 .home-section-5 h1 {
   color: #153a35;
@@ -198,4 +199,37 @@
   font-size: 18px;
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 400;
+}
+.review-button-container {
+  display: flex;
+  gap: 20px;
+}
+.review-button-container button {
+  border-radius: 50%;
+  border: 1px solid #153a35;
+  padding: 8px;
+  color: #153a35;
+  background-color: #dacfc0;
+}
+.review-button-container button:hover {
+  background-color: #153a35;
+  color: #dacfc0;
+}
+.quote-icon-left {
+  position: absolute;
+  color: rgba(232, 82, 42, 0.4);
+  left: 14vw;
+  top: 0;
+}
+.quote-icon-right {
+  position: absolute;
+  color: rgba(232, 82, 42, 0.4);
+  right: 14vw;
+  bottom: 3vw;
+}
+.star-rating {
+  color: #e8522a;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
 }
