@@ -6,9 +6,8 @@
 }
 body {
   background-color: #dacfc0;
-  font-family: "Source Sans Pro", sans-serif;
 }
-.header-container {
+.header_container {
   background-color: #296159;
   color: white;
   position: fixed;
@@ -21,24 +20,24 @@ body {
   top: 0;
   z-index: 1;
 }
-.cafe-logo {
+.cafe_logo {
   width: 130px;
   height: 65px;
 }
-.link-container {
+.link_container {
   display: flex;
   gap: 2rem;
   padding-right: 2rem;
   font-size: 16px;
   font-weight: 500;
 }
-.header-container a:hover {
+.header_container a:hover {
   color: #e8522a;
 }
-.header-container a {
+.header_container a {
   color: white;
   text-decoration: none;
 }
-.header-container a.active {
+.header_container a.active {
   color: #e8522a;
 }

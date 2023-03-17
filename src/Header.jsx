@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
+import styles from "./Header.module.css";
 const Header = () => {
   const [activeLink, setActiveLink] = useState(null);
   const handleLinkClick = (index) => {
@@ -14,11 +15,11 @@ const Header = () => {
     { label: "Contact", to: "/contact" },
   ];
   return (
-    <nav className="header-container">
+    <nav className={styles.header_container}>
       <Link to="/" onClick={() => handleLinkClick(null)}>
-        <img className="cafe-logo" src={logo} alt="logo" />
+        <img className={styles.cafe_logo} src={logo} alt="logo" />
       </Link>
-      <div className="link-container">
+      <div className={styles.link_container}>
         {links.map((link, index) => (
           <Link
             key={index}
