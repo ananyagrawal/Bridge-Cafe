@@ -45,6 +45,7 @@ const Book = () => {
             type="email"
             error={errors.email}
             onChange={handleChange}
+            onBlur={handleBlur}
           />
           <div className={styles.form_row}>
             <FormField
@@ -60,6 +61,7 @@ const Book = () => {
               type="time"
               error={errors.time}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
           <div className={styles.form_row}>
@@ -69,6 +71,7 @@ const Book = () => {
               type="text"
               error={errors.person}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
             <div className={styles.form_field}>
               <label htmlFor="table">Type of Table</label>

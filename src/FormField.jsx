@@ -22,7 +22,7 @@ const FormField = (props) => {
         min={minDate}
         onBlur={props.onBlur}
       />
-      <span className={styles.error}>{props?.error}</span>
+      <span className={styles.error}>{props.error}</span>
     </div>
   );
 };
