@@ -2,20 +2,19 @@ import styles from "./Book.module.css";
 import FormField from "./FormField";
 import useForm from "./Hooks/useForm";
 import Header from "./Header.jsx";
+import FormHeading from "./FormHeading";
 const Book = () => {
   const { formData, errors, handleChange, handleSubmit, handleBlur } =
     useForm();
   return (
     <div className={styles.container}>
       <Header />
-      <div className={styles.text_container}>
-        <h1>Book a Table</h1>
-        <p>
-          Hello! Interested in booking a table? Please let us know the
+      <FormHeading
+        heading="Book a table"
+        paragraph="Hello! Interested in booking a table? Please let us know the
           reservation date with specific time and number of people to book a
-          table.
-        </p>
-      </div>
+          table."
+      />
       <div className={styles.form_container}>
         <form onSubmit={handleSubmit}>
           <div className={styles.form_row}>
@@ -24,8 +23,8 @@ const Book = () => {
               name="firstName"
               type="text"
               value={formData.firstName}
-              onChange={handleChange}
               error={errors.firstName}
+              onChange={handleChange}
             />
             <FormField
               label="Last Name"
