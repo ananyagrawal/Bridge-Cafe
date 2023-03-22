@@ -94,8 +94,9 @@ const useForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const errorMsg = {};
-    if (!formData.firstName) {
+    console.log(errors);
+    const errorMsg = errors;
+    if (formData.firstName === "") {
       errorMsg.firstName = "Field is required";
     }
     if (!formData.lastName) {
@@ -119,31 +120,39 @@ const useForm = () => {
     if (!formData.table) {
       errorMsg.table = "Field is required";
     }
-    if (Object.keys(errorMsg).length > 0) {
-      setErrors({
-        ...errors,
-        firstName: errorMsg.firstName,
-        lastName: errorMsg.lastName,
-        email: errorMsg.email,
-        phone: errorMsg.phone,
-        date: errorMsg.date,
-        time: errorMsg.time,
-        person: errorMsg.person,
-        table: errorMsg.table,
-      });
-    }
-    console.log(Object.keys(errorMsg).length);
-    if (Object.keys(errorMsg).length == 0) {
+
+    setErrors({
+      ...errors,
+      firstName: errorMsg.firstName,
+      lastName: errorMsg.lastName,
+      email: errorMsg.email,
+      phone: errorMsg.phone,
+      date: errorMsg.date,
+      time: errorMsg.time,
+      person: errorMsg.person,
+      table: errorMsg.table,
+    });
+    const isEmpty = Object.values(errors).every((x) => x === null || x === "");
+    if (isEmpty) {
       formLogin();
     }
   };
 
   const formLogin = () => {
     alert("Form submitted successfully");
-    setFormData(() => ({}));
+    setFormData(() => ({
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      date: "",
+      time: "",
+      person: "",
+      table: "",
+    }));
   };
 
-  return { errors, handleChange, handleSubmit, handleBlur };
+  return { formData, errors, handleChange, handleSubmit, handleBlur };
 };
 
 export default useForm;
