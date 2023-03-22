@@ -1,14 +1,18 @@
 import React from "react";
+import Header from "./Header";
 const Inquiry = () => {
   return (
-    <h1
-      style={{
-        textAlign: "center",
-        marginTop: "8rem",
-      }}
-    >
-      Private Event Inquiry
-    </h1>
+    <div>
+      <Header />
+      <h1
+        style={{
+          textAlign: "center",
+          marginTop: "8rem",
+        }}
+      >
+        Private Event Inquiry
+      </h1>
+    </div>
   );
 };
 export default Inquiry;

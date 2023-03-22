@@ -94,7 +94,6 @@ const useForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(errors);
     const errorMsg = errors;
     if (formData.firstName === "") {
       errorMsg.firstName = "Field is required";

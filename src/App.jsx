@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "./Home";
-import Header from "./Header";
 import Contact from "./Contact";
 import Order from "./Order";
 import Inquiry from "./Inquiry";
@@ -20,7 +19,6 @@ const App = () => {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <header>{<Header />}</header>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/order-online" element={<Order />} />

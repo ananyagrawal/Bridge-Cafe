@@ -1,11 +1,13 @@
 import styles from "./Book.module.css";
 import FormField from "./FormField";
 import useForm from "./Hooks/useForm";
+import Header from "./Header.jsx";
 const Book = () => {
   const { formData, errors, handleChange, handleSubmit, handleBlur } =
     useForm();
   return (
     <div className={styles.container}>
+      <Header />
       <div className={styles.text_container}>
         <h1>Book a Table</h1>
         <p>

@@ -31,13 +31,10 @@ body {
   font-size: 16px;
   font-weight: 500;
 }
-.header_container a:hover {
-  color: #e8522a;
-}
-.header_container a {
+.link {
   color: white;
   text-decoration: none;
 }
-.header_container a.active {
+.link_container a:hover {
   color: #e8522a;
 }
