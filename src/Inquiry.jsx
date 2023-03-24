@@ -1,11 +1,10 @@
 import React from "react";
 import Header from "./Header";
-import styles from "./Inquiry.module.css";
 import FormHeading from "./FormHeading";
 import Form from "./Form";
 const Inquiry = () => {
   return (
-    <div className={styles.container}>
+    <div className="inquiry_page_container">
       <Header />
       <FormHeading
         heading="PRIVATE DINING INQUIRIES"

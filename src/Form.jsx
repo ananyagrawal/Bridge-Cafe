@@ -1,13 +1,12 @@
-import styles from "./Form.module.css";
 import FormField from "./FormField";
 import useForm2 from "./Hooks/useForm2";
 const Form = () => {
   const { formData, errors, handleChange, handleSubmit, handleBlur } =
     useForm2();
   return (
-    <div className={styles.form_container}>
+    <div className="form_container">
       <form onSubmit={handleSubmit}>
-        <div className={styles.form_row}>
+        <div className="form_row">
           <FormField
             label="First Name"
             name="firstName"
@@ -42,7 +41,7 @@ const Form = () => {
           value={formData.subject}
           onChange={handleChange}
         />
-        <div className={styles.form_field}>
+        <div className="form_field">
           <label
             style={{ color: errors.message ? "#e8522a" : "white" }}
             htmlFor="message"
@@ -52,16 +51,16 @@ const Form = () => {
           <textarea
             name="message"
             id="message"
-            className={styles.message}
+            className="form_message"
             value={formData.message}
             cols="30"
             rows="10"
             onChange={handleChange}
             style={{ borderColor: errors.message ? "#e8522a" : "white" }}
           ></textarea>
-          <span className={styles.error}>{errors.message}</span>
+          <span className="form_error">{errors.message}</span>
         </div>
-        <button className={styles.submit_button} type="submit">
+        <button className="form_submit_button" type="submit">
           Submit
         </button>
       </form>

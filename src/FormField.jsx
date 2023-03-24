@@ -1,4 +1,3 @@
-import styles from "./Book.module.css";
 import { useEffect, useState } from "react";
 const FormField = (props) => {
   const isError = !!props.error;
@@ -10,7 +9,7 @@ const FormField = (props) => {
   return (
     <div
       style={{ color: isError ? "#e8522a" : "white" }}
-      className={styles.form_field}
+      className="form_field"
     >
       <label htmlFor={props.name}>{props.label}</label>
       <input
@@ -23,7 +22,7 @@ const FormField = (props) => {
         min={minDate}
         onBlur={props.onBlur}
       />
-      <span className={styles.error}>{props.error}</span>
+      <span className="form_error">{props.error}</span>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import styles from "./Book.module.css";
 import FormField from "./FormField";
 import useForm from "./Hooks/useForm";
 import Header from "./Header.jsx";
@@ -7,7 +6,7 @@ const Book = () => {
   const { formData, errors, handleChange, handleSubmit, handleBlur } =
     useForm();
   return (
-    <div className={styles.container}>
+    <div className="book_page_container">
       <Header />
       <FormHeading
         heading="Book a table"
@@ -15,9 +14,9 @@ const Book = () => {
           reservation date with specific time and number of people to book a
           table."
       />
-      <div className={styles.form_container}>
+      <div className="form_container">
         <form onSubmit={handleSubmit}>
-          <div className={styles.form_row}>
+          <div className="form_row">
             <FormField
               label="First Name"
               name="firstName"
@@ -53,7 +52,7 @@ const Book = () => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <div className={styles.form_row}>
+          <div className="form_row">
             <FormField
               label="Date"
               name="date"
@@ -72,7 +71,7 @@ const Book = () => {
               onBlur={handleBlur}
             />
           </div>
-          <div className={styles.form_row}>
+          <div className="form_row">
             <FormField
               label="Number of Person"
               name="person"
@@ -82,7 +81,7 @@ const Book = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <div className={styles.form_field}>
+            <div className="form_field">
               <label
                 style={{ color: errors.table ? "#e8522a" : "white" }}
                 htmlFor="table"
@@ -102,10 +101,10 @@ const Book = () => {
                 <option value="cml">Communal Table</option>
                 <option value="out">Outdoor Table</option>
               </select>
-              <span className={styles.error}>{errors.table}</span>
+              <span className="form_error">{errors.table}</span>
             </div>
           </div>
-          <button className={styles.submit_button} type="submit">
+          <button className="form_submit_button" type="submit">
             Submit
           </button>
         </form>
