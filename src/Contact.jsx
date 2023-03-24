@@ -11,6 +11,12 @@ const Contact = () => {
         paragraph="Please complete the form below."
       />
       <Form />
+      <div className="contact_details_div">
+        <p>Divine Bridge Cafe</p>
+        <p>03, Neelkanth Road, Laxman Jhula, Rishikesh</p>
+        <p>8445319130</p>
+        <p>ananyagrawal698@gmail.com</p>
+      </div>
     </div>
   );
 };

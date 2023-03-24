@@ -8,11 +8,12 @@ const FormHeading = (props) => {
   );
 };
 const Text = styled.div`
-  height: 140px;
+  height: 160px;
   width: 60%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 20px;
   align-items: center;
   color: #153a35;
 `;
