@@ -1,17 +1,11 @@
 import React from "react";
 import OrderHeader from "./OrderHeader.jsx";
+import AddressSection from "./order page sections/AddressSection";
 const Order = () => {
   return (
     <div>
       <OrderHeader />
-      <h1
-        style={{
-          textAlign: "center",
-          marginTop: "8rem",
-        }}
-      >
-        Order Online
-      </h1>
+      <AddressSection />
     </div>
   );
 };
