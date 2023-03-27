@@ -2,10 +2,27 @@ import styles from "./OrderHeader.module.css";
 import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
 import { useState } from "react";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import { BsFillCartFill } from "react-icons/bs";
+import Login from "./Login";
+import Register from "./Register";
 const OrderHeader = () => {
   const [itemNumber, setItemNumber] = useState(0);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const handleClosePopup = () => {
+    setShowLogin(false);
+    setShowRegister(false);
+  };
+  const switchToRegister = () => {
+    setShowRegister(true);
+    setShowLogin(false);
+  };
+
+  const switchToLogin = () => {
+    setShowLogin(true);
+    setShowRegister(false);
+  };
   return (
     <div className={styles.header_container}>
       <Link to="/">
@@ -13,8 +30,18 @@ const OrderHeader = () => {
       </Link>
       <div className={styles.right_section}>
         <div className={styles.profile_container}>
-          <BsPersonCircle size={20} />
-          <p>LOG IN</p>
+          <div className={styles.person}>
+            <BsFillPersonFill size={24} />
+          </div>
+          <div
+            onClick={() => {
+              switchToLogin();
+            }}
+            aria-hidden="true"
+            className={styles.login_link}
+          >
+            LOGIN/REGISTER
+          </div>
         </div>
         <div className={styles.cart_container}>
           <button
@@ -28,6 +55,12 @@ const OrderHeader = () => {
           </button>
         </div>
       </div>
+      {showLogin && (
+        <Login switchToRegister={switchToRegister} onClose={handleClosePopup} />
+      )}
+      {showRegister && (
+        <Register switchToLogin={switchToLogin} onClose={handleClosePopup} />
+      )}
     </div>
   );
 };

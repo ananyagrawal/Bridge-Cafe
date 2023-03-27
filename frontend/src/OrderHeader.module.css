@@ -24,9 +24,16 @@
   display: flex;
   gap: 8px;
   align-items: center;
-}
-.profile_container p {
   font-size: 14px;
+}
+.person {
+  background-color: #dacfc0;
+  color: #296159;
+  padding: 4px;
+  border-radius: 50%;
+}
+.login_link {
+  cursor: pointer;
 }
 .cart_button {
   display: flex;
