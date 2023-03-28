@@ -4,7 +4,7 @@ import styles from "./PopularItems.module.css";
 const PopularItems = () => {
   const [menu, setMenu] = useState([]);
   useEffect(() => {
-    setMenu(menu_data);
+    setMenu(menu_data.slice(0, 6));
   }, []);
   return (
     <div className={styles.section_container}>
