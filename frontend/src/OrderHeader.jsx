@@ -6,10 +6,12 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { BsFillCartFill } from "react-icons/bs";
 import Login from "./Login";
 import Register from "./Register";
+import Cart from "./order page sections/Cart";
 const OrderHeader = () => {
   const [itemNumber, setItemNumber] = useState(0);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [showCart, setShowCart] = useState(false);
   const handleClosePopup = () => {
     setShowLogin(false);
     setShowRegister(false);
@@ -17,6 +19,10 @@ const OrderHeader = () => {
   const switchToRegister = () => {
     setShowRegister(true);
     setShowLogin(false);
+  };
+
+  const handleCartClick = () => {
+    setShowCart(!showCart);
   };
 
   const switchToLogin = () => {
@@ -48,6 +54,7 @@ const OrderHeader = () => {
             className={styles.cart_button}
             onClick={() => {
               setItemNumber(0);
+              handleCartClick();
             }}
           >
             <BsFillCartFill />
@@ -61,6 +68,7 @@ const OrderHeader = () => {
       {showRegister && (
         <Register switchToLogin={switchToLogin} onClose={handleClosePopup} />
       )}
+      {showCart && <Cart />}
     </div>
   );
 };
