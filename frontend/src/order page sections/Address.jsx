@@ -1,7 +1,6 @@
-import React from "react";
 import styles from "./Address.module.css";
 import { IoMdClose } from "react-icons/io";
-import { Link } from "react-router-dom";
+
 function Address(props) {
   return (
     <div className={styles.popup}>
@@ -20,9 +19,6 @@ function Address(props) {
           type="search"
           placeholder="Address"
         ></input>
-        <Link to="/" className={styles.link}>
-          <p>Sign in for saved address</p>
-        </Link>
         <button className={styles.continue_button}>Continue to store</button>
       </div>
     </div>
