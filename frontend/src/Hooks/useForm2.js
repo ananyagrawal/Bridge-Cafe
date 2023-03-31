@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 const useForm2 = () => {
   //Form formData
   const [formData, setFormData] = useState({
@@ -89,7 +90,16 @@ const useForm2 = () => {
     });
     const isEmpty = Object.values(errors).every((x) => x === null || x === "");
     if (isEmpty) {
+      postInquiry();
+    }
+  };
+
+  const postInquiry = async () => {
+    try {
+      await axios.post("api/event-inquiry", formData);
       formLogin();
+    } catch (err) {
+      console.log(err);
     }
   };
 

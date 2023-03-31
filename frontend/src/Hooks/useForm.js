@@ -1,4 +1,6 @@
 import { useState } from "react";
+import axios from "axios";
+
 const useForm = () => {
   //Form formData
   const [formData, setFormData] = useState({
@@ -133,11 +135,22 @@ const useForm = () => {
     });
     const isEmpty = Object.values(errors).every((x) => x === null || x === "");
     if (isEmpty) {
-      formLogin();
+      postFormData();
     }
   };
 
-  const formLogin = () => {
+  const postFormData = async () => {
+    try {
+      console.log(formData);
+      const response = await axios.post("/book-table", formData);
+      console.log(response.data);
+      clearForm();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const clearForm = () => {
     alert("Form submitted successfully");
     setFormData(() => ({
       firstName: "",
