@@ -96,7 +96,7 @@ const useForm2 = () => {
 
   const postInquiry = async () => {
     try {
-      await axios.post("api/event-inquiry", formData);
+      await axios.post("/api/event-inquiry", formData);
       formLogin();
     } catch (err) {
       console.log(err);
