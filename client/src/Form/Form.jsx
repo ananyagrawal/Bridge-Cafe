@@ -1,9 +1,10 @@
 import FormField from "./FormField";
 import useForm2 from "../Hooks/useForm2";
 import "./form.css";
-const Form = () => {
-  const { formData, errors, handleChange, handleSubmit, handleBlur } =
-    useForm2();
+const Form = (props) => {
+  const { formData, errors, handleChange, handleSubmit, handleBlur } = useForm2(
+    props.type
+  );
   return (
     <div className="form_container">
       <form onSubmit={handleSubmit}>

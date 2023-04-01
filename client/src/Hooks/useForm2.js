@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-const useForm2 = () => {
+const useForm2 = (type) => {
   //Form formData
   const [formData, setFormData] = useState({
     firstName: "",
@@ -89,21 +89,31 @@ const useForm2 = () => {
       message: errorMsg.message,
     });
     const isEmpty = Object.values(errors).every((x) => x === null || x === "");
-    if (isEmpty) {
+    if (isEmpty && type === "inquiry") {
       postInquiry();
+    } else if (isEmpty && type === "contact") {
+      postContact();
     }
   };
 
   const postInquiry = async () => {
     try {
       await axios.post("/api/event-inquiry", formData);
-      formLogin();
+      clearForm();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const postContact = async () => {
+    try {
+      await axios.post("/api/contact", formData);
+      clearForm();
     } catch (err) {
       console.log(err);
     }
   };
 
-  const formLogin = () => {
+  const clearForm = () => {
     alert("Form submitted successfully");
     setFormData(() => ({
       firstName: "",

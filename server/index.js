@@ -24,6 +24,9 @@ mongoose.connect(process.env.MONGO_LINK, {
 const eventInquiryRouter = require('./routes/eventInquiry');
 app.use('/event-inquiry', eventInquiryRouter);
 
+const contactRouter = require('./routes/contact');
+app.use('/contact', contactRouter);
+
 const bookTableRouter = require('./routes/bookTable');
 app.use('/book-table', bookTableRouter);
 

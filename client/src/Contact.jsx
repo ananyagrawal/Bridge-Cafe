@@ -10,7 +10,7 @@ const Contact = () => {
         heading="Contact us"
         paragraph="Please complete the form below."
       />
-      <Form />
+      <Form type="contact" />
       <div className="contact_details_div">
         <p>Divine Bridge Cafe</p>
         <p>03, Neelkanth Road, Laxman Jhula, Rishikesh</p>
