@@ -1,11 +1,11 @@
-const express = require('express');
+import express from "express";
 const router = express.Router();
-const BookTable = require('../models/BookTable');
+import {BookModel} from "../models/BookTable.js"
 
 router.post('/', async (req, res) => {
   try {
     const { firstName, lastName, phone, email, date, time, person, table } = req.body;
-    const bookData = new BookTable({
+    const bookData = new BookModel({
       firstName,
       lastName,
       phone,
@@ -23,4 +23,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export {router as bookTableRouter}

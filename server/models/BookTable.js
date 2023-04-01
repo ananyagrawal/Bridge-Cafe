@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const BookSchema = new mongoose.Schema({
   firstName: {
@@ -36,6 +36,4 @@ const BookSchema = new mongoose.Schema({
 });
 
 // Creating model for book table schema
-const bookModel = mongoose.model('bookModel', BookSchema);
-
-module.exports = bookModel;
+export const BookModel = mongoose.model('bookTable', BookSchema);

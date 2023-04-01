@@ -22,8 +22,13 @@ const Login = (props) => {
         <div className={styles.second_section}>
           <input
             className={styles.input_box}
-            placeholder="Phone Number or Email"
+            placeholder="Phone or Email"
             type="text"
+          />
+          <input
+            className={styles.input_box}
+            placeholder="Password"
+            type="password"
           />
           <p>
             By clicking on login, you agree to our Terms and Conditions and

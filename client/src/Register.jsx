@@ -24,10 +24,14 @@ const Register = (props) => {
           <input className={styles.input_box} placeholder="Name" type="text" />
           <input
             className={styles.input_box}
-            placeholder="Phone Number"
+            placeholder="Phone Number or Email"
             type="text"
           />
-          <input className={styles.input_box} placeholder="Email" type="text" />
+          <input
+            className={styles.input_box}
+            placeholder="Create Password"
+            type="text"
+          />
           <p>
             By creating an account, you agree to our Terms and Conditions and
             Privacy Statement

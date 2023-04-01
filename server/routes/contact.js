@@ -1,6 +1,6 @@
-const express = require('express');
+import express from "express"
 const router = express.Router();
-const Contact = require('../models/Contact');
+import { Contact } from "../models/Contact.js";
 
 router.post('/', async(req, res) => {
     try{
@@ -14,4 +14,4 @@ router.post('/', async(req, res) => {
     }
 })
 
-module.exports = router;
+export {router as contactRouter}

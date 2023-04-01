@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose"
 
 const eventInquirySchema = new mongoose.Schema({
     firstName: { type: String, required: true},
@@ -8,6 +8,5 @@ const eventInquirySchema = new mongoose.Schema({
     message: { type: String, required: true},
 });
 
-const EventInquiry = mongoose.model('EventInquiry', eventInquirySchema);
+export const eventInquiryModel = mongoose.model('eventInquiry', eventInquirySchema);
 
-module.exports = EventInquiry;

@@ -1,11 +1,12 @@
-const express = require('express');
+import express from 'express';
+import { eventInquiryModel } from '../models/EventInquiry.js';
+
 const router = express.Router();
-const EventInquiry = require('../models/EventInquiry');
 
 router.post('/', async(req, res) => {
     try{
         const {firstName, lastName, email, subject, message} = req.body;
-        const eventInquiry = new EventInquiry({firstName, lastName, email, subject, message});
+        const eventInquiry = new eventInquiryModel({firstName, lastName, email, subject, message});
         await eventInquiry.save();
         res.status(201).json({ message: 'Event Inquiry submitted successfully'});
     } catch (err) {
@@ -14,4 +15,4 @@ router.post('/', async(req, res) => {
     }
 })
 
-module.exports = router;
+export {router as eventInquiryRouter}
