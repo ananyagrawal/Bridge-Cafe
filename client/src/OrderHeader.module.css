@@ -1,0 +1,51 @@
+.header_container {
+  background-color: #296159;
+  color: white;
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2.5rem;
+  top: 0;
+  z-index: 1;
+}
+.cafe_logo {
+  width: 130px;
+  height: 65px;
+}
+.right_section {
+  display: flex;
+  gap: 20px;
+  margin-right: 1rem;
+}
+.profile_container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+}
+.person {
+  background-color: #dacfc0;
+  color: #296159;
+  padding: 4px;
+  border-radius: 50%;
+}
+.login_link {
+  cursor: pointer;
+}
+.cart_button {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-radius: 2rem;
+  border: 1px solid #e8522a;
+  color: white;
+  background-color: #e8522a;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: "Source Sans Pro", sans-serif;
+}

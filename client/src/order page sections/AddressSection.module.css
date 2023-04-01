@@ -1,0 +1,58 @@
+.section_container {
+  margin-top: 70px;
+  padding: 40px 60px;
+}
+.top_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top_container p {
+  color: #153a35;
+  font-size: 16px;
+  font-weight: 500;
+}
+.button_group {
+  display: flex;
+  background-color: #296159;
+  border-radius: 50px;
+}
+.delivery_button,
+.pickup_button {
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #296159;
+  color: white;
+}
+.active {
+  background-color: #e8522a;
+}
+.delivery_container {
+  background-color: #296159;
+  margin: 32px 0;
+  display: flex;
+  height: 200px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  gap: 20px;
+}
+.address_button {
+  border-radius: 2rem;
+  border: 1px solid #e8522a;
+  color: white;
+  background-color: #e8522a;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: "Source Sans Pro", sans-serif;
+}
+.display {
+  display: none;
+}
