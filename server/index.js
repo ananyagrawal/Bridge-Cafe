@@ -33,7 +33,7 @@ app.use('/contact', contactRouter);
 
 app.use('/book-table', bookTableRouter);
 
-app.use("/auth", userRouter);
+app.use("/user", userRouter);
 
 // error handling middleware
 app.use((err, req, res, next) => {

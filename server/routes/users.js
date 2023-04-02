@@ -7,6 +7,11 @@ const router = express.Router();
 
 router.post("/register", async(req,res) => {
     const {name, emailOrPhone, password} = req.body;
+
+    if(!name || !emailOrPhone || !password) {
+        return res.json({message: "Enter all fields"})
+    }
+
     const user = await UserModel.findOne({emailOrPhone});
 
     if (user) {
@@ -23,6 +28,11 @@ router.post("/register", async(req,res) => {
 
 router.post("/login", async(req,res) => {
     const {emailOrPhone, password} = req.body;
+
+    if(!emailOrPhone || !password) {
+        return res.json({message: "Enter all fields"})
+    }
+
     const user = await UserModel.findOne({emailOrPhone});
 
     if (!user) {
@@ -35,7 +45,7 @@ router.post("/login", async(req,res) => {
         return res.json({message: "Username or Password is incorrect"});
     }
 
-    const token = jwt.sign({id: user._id }, process.env.SECRET);
+    const token = jwt.sign({id: user._id }, process.env.SECRET, {expiresIn: '10m' });
     res.json({token, userId: user._id});
 })
 

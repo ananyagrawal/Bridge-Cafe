@@ -13,6 +13,12 @@ export default defineConfig({
         secure: false,
         rewrite: (path) => path.replace("/api", ""),
       },
+      "/auth": {
+        target: "http://localhost:1337",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace("/auth", ""),
+      },
     },
   },
 });
