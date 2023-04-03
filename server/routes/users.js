@@ -49,4 +49,15 @@ router.post("/login", async(req,res) => {
     res.json({token, userId: user._id});
 })
 
+ router.post('/current-user', async(req,res) => {
+    const {userID} = req.body;
+    try{
+        const user = await UserModel.findOne({_id: userID});
+        return res.json(user);
+    } catch (err) {
+        return res.json({message: "something went wrong"})
+    }
+
+ });
+
 export {router as userRouter}
