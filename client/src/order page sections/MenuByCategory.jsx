@@ -1,11 +1,19 @@
-import { useState } from "react";
-import menuData from "../menuItem.json";
+import { useState, useEffect } from "react";
 import styles from "./MenuByCategory.module.css";
-const MenuByCategory = ({ category }) => {
-  const menuItems = menuData.filter((item) => item.category === category);
 
+const MenuByCategory = ({ category }) => {
   const [itemAdded, setItemAdded] = useState(false);
   const [itemIndex, setItemIndex] = useState(null);
+  const [menuData, setMenuData] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/menu")
+      .then((res) => res.json())
+      .then((data) => setMenuData(data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  const menuItems = menuData.filter((item) => item.category === category);
 
   const handleAddButton = (index) => {
     setItemAdded(true);

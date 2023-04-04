@@ -7,6 +7,7 @@ import { userRouter} from './routes/users.js'
 import {eventInquiryRouter} from './routes/eventInquiry.js'
 import {contactRouter} from './routes/contact.js'
 import {bookTableRouter} from './routes/bookTable.js'
+import {menuRouter} from './routes/menu.js'
 
 // express app
 const app = express();
@@ -34,6 +35,8 @@ app.use('/contact', contactRouter);
 app.use('/book-table', bookTableRouter);
 
 app.use("/user", userRouter);
+
+app.use("/menu", menuRouter);
 
 // error handling middleware
 app.use((err, req, res, next) => {

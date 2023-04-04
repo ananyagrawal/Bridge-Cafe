@@ -1,10 +1,12 @@
-import menu_data from "../menuItem.json";
 import { useState, useEffect } from "react";
 import styles from "./PopularItems.module.css";
 const PopularItems = () => {
   const [menu, setMenu] = useState([]);
   useEffect(() => {
-    setMenu(menu_data.slice(0, 6));
+    fetch("/api/menu")
+      .then((res) => res.json())
+      .then((data) => setMenu(data.slice(0, 6)))
+      .catch((err) => console.error(err));
   }, []);
   return (
     <div className={styles.section_container}>

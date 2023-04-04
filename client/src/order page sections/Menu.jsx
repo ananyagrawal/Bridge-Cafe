@@ -1,5 +1,4 @@
 import styles from "./Menu.module.css";
-import menuData from "../menuItem.json";
 import { useState, useEffect, useRef } from "react";
 import MenuByCategory from "./MenuByCategory";
 const Menu = () => {
@@ -7,7 +6,10 @@ const Menu = () => {
   const [categories, setCategories] = useState(new Set());
 
   useEffect(() => {
-    setMenu(menuData);
+    fetch("/api/menu")
+      .then((res) => res.json())
+      .then((data) => setMenu(data))
+      .catch((err) => console.error(err));
   }, []);
 
   useEffect(() => {
@@ -19,11 +21,12 @@ const Menu = () => {
   }, [menu]);
 
   const refs = {
-    "North Indian": useRef(null),
-    Chinese: useRef(null),
-    Italian: useRef(null),
-    "South Indian": useRef(null),
-    Desserts: useRef(null),
+    "Indian Dishes": useRef(null),
+    Noodles: useRef(null),
+    Momos: useRef(null),
+    Breads: useRef(null),
+    Dosas: useRef(null),
+    Pizzas: useRef(null),
   };
 
   const headerHeight = 70;
