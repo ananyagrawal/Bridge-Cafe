@@ -1,27 +1,25 @@
 import { useState, useEffect } from "react";
 import styles from "./MenuByCategory.module.css";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 const MenuByCategory = ({ category }) => {
   const [itemAdded, setItemAdded] = useState(false);
   // const [itemIndex, setItemIndex] = useState(null);
-  const [menuData, setMenuData] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
 
-  useEffect(() => {
-    fetch("/api/menu")
-      .then((res) => res.json())
-      .then((data) => setMenuData(data))
-      .catch((err) => console.error(err));
-  }, []);
+  const { data: menuData } = useQuery(["menu"], async () => {
+    const response = await axios.get("/api/menu");
+    return response.data;
+  });
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(data);
-  }, []);
+  // useEffect(() => {
+  //   const data = JSON.parse(localStorage.getItem("cart")) || [];
+  //   setCart(data);
+  // }, []);
 
-  const menuItems = menuData.filter((item) => item.category === category);
+  const menuItems = menuData?.filter((item) => item.category === category);
 
   const handleAddButton = async (item) => {
     const userId = window.localStorage.getItem("userId");

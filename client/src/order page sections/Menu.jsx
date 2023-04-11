@@ -1,24 +1,24 @@
 import styles from "./Menu.module.css";
 import { useState, useEffect, useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
 import MenuByCategory from "./MenuByCategory";
+import axios from "axios";
+
 const Menu = () => {
-  const [menu, setMenu] = useState([]);
   const [categories, setCategories] = useState(new Set());
 
-  useEffect(() => {
-    fetch("/api/menu")
-      .then((res) => res.json())
-      .then((data) => setMenu(data))
-      .catch((err) => console.error(err));
-  }, []);
+  const { data: menuData } = useQuery(["menu"], async () => {
+    const response = await axios.get("/api/menu");
+    return response.data;
+  });
 
   useEffect(() => {
     const categorySet = new Set();
-    menu.forEach((item) => {
+    menuData?.forEach((item) => {
       categorySet.add(item.category);
     });
     setCategories(categorySet);
-  }, [menu]);
+  }, [menuData]);
 
   const refs = {
     "Indian Dishes": useRef(null),

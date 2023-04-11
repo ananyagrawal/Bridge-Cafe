@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react";
 import styles from "./PopularItems.module.css";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 const PopularItems = () => {
-  const [menu, setMenu] = useState([]);
-  useEffect(() => {
-    fetch("/api/menu")
-      .then((res) => res.json())
-      .then((data) => setMenu(data.slice(0, 6)))
-      .catch((err) => console.error(err));
-  }, []);
+  const { data: menuData } = useQuery(["menu"], async () => {
+    const response = await axios.get("/api/menu");
+    return response.data;
+  });
+
+  const menuItems = menuData?.slice(0, 6);
+
   return (
     <div className={styles.section_container}>
       <h2 className={styles.heading}>Popular Items</h2>
       <div className={styles.items_grid}>
-        {menu.map((item, index) => {
+        {menuItems?.map((item, index) => {
           return (
             <div className={styles.item_container} key={index}>
               <img className={styles.item_image} src={item.image} alt=""></img>
