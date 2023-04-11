@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import styles from "./MenuByCategory.module.css";
+import axios from "axios";
 
 const MenuByCategory = ({ category }) => {
   const [itemAdded, setItemAdded] = useState(false);
-  const [itemIndex, setItemIndex] = useState(null);
+  // const [itemIndex, setItemIndex] = useState(null);
   const [menuData, setMenuData] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     fetch("/api/menu")
@@ -13,17 +16,34 @@ const MenuByCategory = ({ category }) => {
       .catch((err) => console.error(err));
   }, []);
 
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(data);
+  }, []);
+
   const menuItems = menuData.filter((item) => item.category === category);
 
-  const handleAddButton = (index) => {
+  const handleAddButton = async (item) => {
+    const userId = window.localStorage.getItem("userId");
+    const itemId = item._id;
+    if (userId) {
+      try {
+        axios.post("/api/cart", { userId, itemId, quantity });
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      const cartItem = {
+        item: itemId,
+        quantity: quantity,
+      };
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(cartItem);
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
     setItemAdded(true);
     setTimeout(() => setItemAdded(false), 3000);
-    setItemIndex(index);
-    console.log(itemIndex);
-    console.log(index);
-    console.log(menuItems[itemIndex]);
   };
-
   return (
     <div>
       <h2 className={styles.menu_category_heading}>{category}</h2>
@@ -40,8 +60,7 @@ const MenuByCategory = ({ category }) => {
                     <p className={styles.item_price}>Rs. {item.price}</p>
                     <button
                       onClick={() => {
-                        // setItemIndex(index);
-                        handleAddButton(index);
+                        handleAddButton(item);
                       }}
                       className={styles.add_button}
                     >

@@ -1,8 +1,9 @@
 import styles from "./Login.module.css";
 import { Link } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 import { useState } from "react";
+// import AuthContext from "./AuthContext";
 import axios from "axios";
 const Login = (props) => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
@@ -10,8 +11,8 @@ const Login = (props) => {
   const [emailOrPhoneError, setEmailOrPhoneError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  // eslint-disable-next-line no-unused-vars
-  const [_, setCookies] = useCookies(["access_token"]);
+  // const value = useContext(AuthContext);
+  // const [_, setCookies] = useCookies(["access_token"]);
 
   const handleEmailOrPhoneBlur = () => {
     if (emailOrPhone && !isValidEmailOrPhone(emailOrPhone)) {
@@ -59,14 +60,15 @@ const Login = (props) => {
         emailOrPhone,
         password,
       });
-      if (!response.data.userId) {
-        alert(response.data.message);
-      } else {
-        setCookies("access_token", response.data.token);
-        window.localStorage.setItem("userID", response.data.userId);
-        alert("Login Successful");
-        props.onClose();
-      }
+      // if (!response.data.userId) {
+      //   alert(response.data.message);
+      // } else {
+      // setCookies("access_token", response.data.token);
+      // window.localStorage.setItem("userID", response.data.userId);
+      // await value.login();
+      alert(response.data.message);
+      props.onClose();
+      // }
     } catch (err) {
       console.log(err);
     }
@@ -109,7 +111,7 @@ const Login = (props) => {
           <div className={styles.form_group}>
             <input
               className={styles.input_box}
-              placeholder="Create Password"
+              placeholder="Enter Password"
               type="password"
               value={password}
               onChange={(e) => {

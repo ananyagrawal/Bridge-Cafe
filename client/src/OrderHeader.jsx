@@ -1,20 +1,25 @@
 import styles from "./OrderHeader.module.css";
 import { Link } from "react-router-dom";
 import logo from "./assets/images/logo.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BsFillCartFill } from "react-icons/bs";
 import Login from "./Login";
 import Register from "./Register";
 import Cart from "./order page sections/Cart";
-import { useCookies } from "react-cookie";
-import axios from "axios";
+// import { useCookies } from "react-cookie";
+// import axios from "axios";
+import AuthContext from "./AuthContext.jsx";
+
+// const authContext = useContext(AuthContext);
+
 const OrderHeader = () => {
-  const [itemNumber, setItemNumber] = useState(0);
+  const [itemCount, setItemCount] = useState(0);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  const [userData, setUserData] = useState([]);
+  // const [userData, setUserData] = useState([]);
+  const value = useContext(AuthContext);
   const handleClosePopup = () => {
     setShowLogin(false);
     setShowRegister(false);
@@ -33,27 +38,35 @@ const OrderHeader = () => {
     setShowRegister(false);
   };
 
-  const [cookies, setCookies] = useCookies(["access_token"]);
-
-  const logout = () => {
-    setCookies("access_token", "");
-    window.localStorage.removeItem("userID");
-  };
-
   useEffect(() => {
-    fetchData();
-    async function fetchData() {
-      const userID = window.localStorage.userID;
-      try {
-        const response = await axios.post("/auth/user/current-user", {
-          userID,
-        });
-        setUserData(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    }
+    value.login();
   }, []);
+
+  // const logout = async () => {
+  //   try {
+  //     const response = await axios.post("/auth/user/logout");
+  //     console.log(userData);
+  //     alert(response.data.message);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // useEffect(() => {
+  // fetchData();
+  // async function fetchData() {
+  //   // const userID = window.localStorage.userID;
+  //   try {
+  //     const response = await axios.post("/auth/user/current-user");
+  //     setUserData(response.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+  // auth();
+  // setUserData(value.userInfo);
+  // console.log(value);
+  // }, [value]);
 
   return (
     <div className={styles.header_container}>
@@ -65,7 +78,7 @@ const OrderHeader = () => {
           <div className={styles.person}>
             <BsFillPersonFill size={24} />
           </div>
-          {!cookies.access_token ? (
+          {!value.userInfo?.name ? (
             <div
               onClick={() => {
                 switchToLogin();
@@ -77,8 +90,8 @@ const OrderHeader = () => {
             </div>
           ) : (
             <div>
-              {userData ? <p>{userData.name}</p> : ""}
-              <button onClick={logout}>Logout</button>
+              {value.userInfo ? <p>{value.userInfo?.name}</p> : ""}
+              <button onClick={value.logout}>Logout</button>
             </div>
           )}
         </div>
@@ -86,12 +99,12 @@ const OrderHeader = () => {
           <button
             className={styles.cart_button}
             onClick={() => {
-              setItemNumber(0);
+              setItemCount(0);
               handleCartClick();
             }}
           >
             <BsFillCartFill />
-            {itemNumber}
+            {itemCount}
           </button>
         </div>
       </div>
