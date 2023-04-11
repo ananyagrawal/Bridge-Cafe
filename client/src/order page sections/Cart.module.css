@@ -11,4 +11,16 @@
 .cart_content {
   width: 40%;
   background-color: #296159;
+  padding: 20px;
+}
+.top_section {
+  display: flex;
+  justify-content: space-between;
+}
+.top_section_left {
+  display: flex;
+  flex-direction: column;
+}
+.top_section_left h1 {
+  font-size: 24px;
 }
