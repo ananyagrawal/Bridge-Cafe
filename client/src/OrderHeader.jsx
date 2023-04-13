@@ -40,7 +40,7 @@ const OrderHeader = () => {
 
   useEffect(() => {
     value.login();
-  }, []);
+  }, [value]);
 
   // const logout = async () => {
   //   try {

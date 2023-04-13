@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "./MenuByCategory.module.css";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import AuthContext from "../AuthContext";
 
 const MenuByCategory = ({ category }) => {
   const [itemAdded, setItemAdded] = useState(false);
   // const [itemIndex, setItemIndex] = useState(null);
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
   // const [cart, setCart] = useState([]);
 
   const { data: menuData } = useQuery(["menu"], async () => {
@@ -14,6 +15,7 @@ const MenuByCategory = ({ category }) => {
     return response.data;
   });
 
+  const value = useContext(AuthContext);
   // useEffect(() => {
   //   const data = JSON.parse(localStorage.getItem("cart")) || [];
   //   setCart(data);
@@ -22,23 +24,24 @@ const MenuByCategory = ({ category }) => {
   const menuItems = menuData?.filter((item) => item.category === category);
 
   const handleAddButton = async (item) => {
-    const userId = window.localStorage.getItem("userId");
+    // const userId = window.localStorage.getItem("userId");
     const itemId = item._id;
-    if (userId) {
+    const userId = value?.userInfo?._id;
+    if (value.isAuth) {
       try {
-        axios.post("/api/cart", { userId, itemId, quantity });
+        axios.post("/api/cart", { userId, itemId });
       } catch (err) {
         console.error(err);
       }
-    } else {
-      const cartItem = {
-        item: itemId,
-        quantity: quantity,
-      };
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push(cartItem);
-      localStorage.setItem("cart", JSON.stringify(cart));
     }
+    // else {
+    //   const cartItem = {
+    //     item: itemId,
+    //   };
+    //   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    //   cart.push(cartItem);
+    //   localStorage.setItem("cart", JSON.stringify(cart));
+    // }
     setItemAdded(true);
     setTimeout(() => setItemAdded(false), 3000);
   };

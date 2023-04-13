@@ -1,6 +1,9 @@
 import styles from "./Cart.module.css";
 import { IoMdClose } from "react-icons/io";
+import { useContext } from "react";
+import AuthContext from "../AuthContext";
 const Cart = () => {
+  const value = useContext(AuthContext);
   return (
     <div className={styles.cart_container}>
       <div className={styles.cart_content}>
