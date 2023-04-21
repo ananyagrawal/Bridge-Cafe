@@ -60,7 +60,35 @@ router.post("/login", async(req,res) => {
         return res.json(user);
     } catch (err) {
         return res.json({message: "Invalid token"})
+        // console.error(err);
     }
+ });
+
+ router.post('/add-cart', async(req,res) => {
+    const {cart} = req.body;
+    const token = req.cookies.jwt;
+   try{
+       const decodedToken = jwt.verify(token, process.env.SECRET);
+       console.log(decodedToken._id)
+       const user = await UserModel.findOneAndUpdate({_id: decodedToken.id}, {cart}, {upsert: true}).populate('cart.itemId');
+       res.json(user)
+   } catch (error) {
+       console.error(error);
+       res.status(500).json({message: 'Error adding item to cart'})
+   }
+})
+
+router.get('/get-cart', async (req, res) => {
+  //  const userId = req.user ? req.user.id : undefined; 
+   // If the user is logged in, get their user ID from the request object
+  const {userId} = req.body;
+   try {
+     const user = await UserModel.findOne({ userId }).populate('cart.itemId'); // Find the user's cart and populate the `itemId` field with data from the `MenuItem` model
+     res.json(user.cart);
+   } catch (error) {
+     console.error(error);
+     res.status(500).json({ message: 'Error retrieving cart' });
+   }
  });
 
  router.post("/logout", (req, res) => {

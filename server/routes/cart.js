@@ -50,7 +50,8 @@ router.post('/', async (req, res) => {
     try{
         const cart = await cartModel.findOneAndUpdate(
             {userId},
-            { $addToSet: { items: {itemId, quantity} } },
+            {items},
+            // { $addToSet: { items: {itemId, quantity} } },
             { upsert: true, new: true }
         ).populate('items.itemId');
         res.json(cart);
@@ -72,6 +73,7 @@ router.get('/', async (req, res) => {
       res.status(500).json({ message: 'Error retrieving cart' });
     }
   });
+
   
 
 export {router as cartRouter}
