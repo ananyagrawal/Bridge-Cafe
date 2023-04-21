@@ -1,8 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import styles from "./MenuByCategory.module.css";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import AuthContext from "../AuthContext";
+import { CartContext } from "../CartContext";
 
 const MenuByCategory = ({ category }) => {
   const [itemAdded, setItemAdded] = useState(false);
@@ -16,6 +17,8 @@ const MenuByCategory = ({ category }) => {
   });
 
   const value = useContext(AuthContext);
+
+  const { setCartProducts } = useContext(CartContext);
   // useEffect(() => {
   //   const data = JSON.parse(localStorage.getItem("cart")) || [];
   //   setCart(data);

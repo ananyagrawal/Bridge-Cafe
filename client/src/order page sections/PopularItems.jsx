@@ -1,11 +1,15 @@
 import styles from "./PopularItems.module.css";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useContext } from "react";
+import { CartContext } from "../CartContext";
 const PopularItems = () => {
   const { data: menuData } = useQuery(["menu"], async () => {
     const response = await axios.get("/api/menu");
     return response.data;
   });
+
+  const { addToCart } = useContext(CartContext);
 
   const menuItems = menuData?.slice(0, 6);
 
@@ -21,7 +25,14 @@ const PopularItems = () => {
                 <h4>{item.name}</h4>
                 <div className={styles.item_sub_container}>
                   <p>Rs. {item.price}</p>
-                  <button className={styles.add_button}>Add</button>
+                  <button
+                    onClick={() => {
+                      addToCart(item);
+                    }}
+                    className={styles.add_button}
+                  >
+                    Add
+                  </button>
                 </div>
               </div>
             </div>

@@ -7,19 +7,20 @@ import { BsFillCartFill } from "react-icons/bs";
 import Login from "./Login";
 import Register from "./Register";
 import Cart from "./order page sections/Cart";
-// import { useCookies } from "react-cookie";
-// import axios from "axios";
+import { CartContext } from "./CartContext";
 import AuthContext from "./AuthContext.jsx";
 
-// const authContext = useContext(AuthContext);
-
 const OrderHeader = () => {
-  const [itemCount, setItemCount] = useState(0);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  // const [userData, setUserData] = useState([]);
   const value = useContext(AuthContext);
+  const { cartItems, clearCart } = useContext(CartContext);
+
+  // useEffect(() => {
+  //   value.login();
+  // }, [value]);
+
   const handleClosePopup = () => {
     setShowLogin(false);
     setShowRegister(false);
@@ -37,36 +38,6 @@ const OrderHeader = () => {
     setShowLogin(true);
     setShowRegister(false);
   };
-
-  useEffect(() => {
-    value.login();
-  }, [value]);
-
-  // const logout = async () => {
-  //   try {
-  //     const response = await axios.post("/auth/user/logout");
-  //     console.log(userData);
-  //     alert(response.data.message);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // useEffect(() => {
-  // fetchData();
-  // async function fetchData() {
-  //   // const userID = window.localStorage.userID;
-  //   try {
-  //     const response = await axios.post("/auth/user/current-user");
-  //     setUserData(response.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-  // auth();
-  // setUserData(value.userInfo);
-  // console.log(value);
-  // }, [value]);
 
   return (
     <div className={styles.header_container}>
@@ -91,7 +62,14 @@ const OrderHeader = () => {
           ) : (
             <div>
               {value.userInfo ? <p>{value.userInfo?.name}</p> : ""}
-              <button onClick={value.logout}>Logout</button>
+              <button
+                onClick={() => {
+                  value.logout();
+                  clearCart();
+                }}
+              >
+                Logout
+              </button>
             </div>
           )}
         </div>
@@ -99,12 +77,13 @@ const OrderHeader = () => {
           <button
             className={styles.cart_button}
             onClick={() => {
-              setItemCount(0);
               handleCartClick();
             }}
           >
             <BsFillCartFill />
-            {itemCount}
+            {cartItems?.reduce((total, item) => {
+              return total + item.quantity;
+            }, 0)}
           </button>
         </div>
       </div>

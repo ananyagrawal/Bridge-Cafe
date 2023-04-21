@@ -6,11 +6,19 @@ export const AuthContext = createContext(null);
 export const AuthContextProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
+
   const login = async () => {
     try {
-      const response = await axios.post("/auth/user/current-user");
-      setIsAuth(true);
-      setUserInfo(response.data);
+      console.log("check auth");
+      if (!isAuth) {
+        // check if user is not already authenticated
+        const response = await axios.post("/auth/user/current-user");
+        if (response.data.message !== "Invalid token") {
+          console.log("setAuth true");
+          setIsAuth(true);
+          setUserInfo(response.data);
+        }
+      }
     } catch (err) {
       console.log(err);
     }

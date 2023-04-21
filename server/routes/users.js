@@ -52,25 +52,46 @@ router.post("/login", async(req,res) => {
     // res.json({token});
 })
 
- router.post('/current-user', async(req,res) => {
-    const token = req.cookies.jwt;
-    try{
-        const decodedToken = jwt.verify(token, process.env.SECRET);
-        const user = await UserModel.findOne({_id: decodedToken.id});
-        return res.json(user);
-    } catch (err) {
-        return res.json({message: "Invalid token"})
-        // console.error(err);
-    }
- });
+//  router.post('/current-user', async(req,res) => {
+//     const token = req.cookies.jwt;
+//     try{
+//         const decodedToken = jwt.verify(token, process.env.SECRET);
+//         const user = await UserModel.findOne({_id: decodedToken.id});
+//         return res.json(user);
+//     } catch (err) {
+//         return res.json({message: "Invalid token"})
+//         console.error(err);
+//     }
+//  });
 
- router.post('/add-cart', async(req,res) => {
-    const {cart} = req.body;
+ // Middleware function to authenticate JWT
+const authenticateJWT = (req, res, next) => {
     const token = req.cookies.jwt;
+    if (token) {
+      jwt.verify(token, process.env.SECRET, (err, decodedToken) => {
+        if (err) {
+          return res.status(401).json({ message: 'Invalid token' });
+        } else {
+          req.userId = decodedToken.id;
+          next();
+        }
+      });
+    } else {
+      return res.status(401).json({ message: 'Missing token' });
+    }
+  };
+  
+  // Protected route that requires authentication
+  router.get('/user-data', authenticateJWT, async (req, res) => {
+    const user = await UserModel.findOne({ _id: req.userId });
+    res.json(user);
+  });
+  
+
+ router.post('/add-cart', authenticateJWT,  async(req,res) => {
+    const {cart} = req.body;
    try{
-       const decodedToken = jwt.verify(token, process.env.SECRET);
-       console.log(decodedToken._id)
-       const user = await UserModel.findOneAndUpdate({_id: decodedToken.id}, {cart}, {upsert: true}).populate('cart.itemId');
+       const user = await UserModel.findOneAndUpdate({_id: req.userId}, {cart}, {upsert: true}).populate('cart.itemId');
        res.json(user)
    } catch (error) {
        console.error(error);
@@ -78,12 +99,12 @@ router.post("/login", async(req,res) => {
    }
 })
 
-router.get('/get-cart', async (req, res) => {
+router.get('/get-cart', authenticateJWT, async (req, res) => {
   //  const userId = req.user ? req.user.id : undefined; 
    // If the user is logged in, get their user ID from the request object
-  const {userId} = req.body;
+//   const {userId} = req.body;
    try {
-     const user = await UserModel.findOne({ userId }).populate('cart.itemId'); // Find the user's cart and populate the `itemId` field with data from the `MenuItem` model
+     const user = await UserModel.findOne({ id: req.userId }).populate('cart.itemId'); // Find the user's cart and populate the `itemId` field with data from the `MenuItem` model
      res.json(user.cart);
    } catch (error) {
      console.error(error);

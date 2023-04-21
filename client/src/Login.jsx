@@ -2,8 +2,8 @@ import styles from "./Login.module.css";
 import { Link } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 // import { useCookies } from "react-cookie";
-import { useState } from "react";
-// import AuthContext from "./AuthContext";
+import { useState, useContext } from "react";
+import AuthContext from "./AuthContext";
 import axios from "axios";
 const Login = (props) => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
@@ -11,7 +11,7 @@ const Login = (props) => {
   const [emailOrPhoneError, setEmailOrPhoneError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  // const value = useContext(AuthContext);
+  const value = useContext(AuthContext);
   // const [_, setCookies] = useCookies(["access_token"]);
 
   const handleEmailOrPhoneBlur = () => {
