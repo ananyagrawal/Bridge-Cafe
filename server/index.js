@@ -1,5 +1,4 @@
 // dependencies
-import mongoose from "mongoose"
 import express from "express"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser"
@@ -9,6 +8,9 @@ import {contactRouter} from './routes/contact.js'
 import {bookTableRouter} from './routes/bookTable.js'
 import {menuRouter} from './routes/menu.js'
 import { cartRouter } from "./routes/cart.js"
+import connectDb from './config/db.js'
+
+connectDb();
 
 // express app
 const app = express();
@@ -18,18 +20,6 @@ app.use(cookieParser());
 
 // configuring dotenv to import any variable secretly
 dotenv.config();
-
-// connecting to MongoDB
-mongoose.connect(process.env.MONGO_LINK, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => {
-    console.log('Connected to mongoose');
-  })
-  .catch((err) => {
-    console.log('Failed to connect to mongoose', err);
-  });
 
 app.use('/event-inquiry', eventInquiryRouter);
 
@@ -50,6 +40,5 @@ app.use((err, req, res, next) => {
 });
 
 // listen for requests
-app.listen(process.env.PORT, () => {
-  console.log('listening on port', process.env.PORT);
-});
+const PORT = process.env.PORT;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

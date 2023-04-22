@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect, useContext } from "react";
-import AuthContext from "./AuthContext.jsx";
+import { createContext, useState, useEffect } from "react";
+// import AuthContext from "./AuthContext.jsx";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 export const CartContext = createContext({
@@ -13,7 +13,7 @@ export const CartContext = createContext({
 export const CartContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  const { isAuth, userInfo } = useContext(AuthContext);
+  // const { isAuth, userInfo } = useContext(AuthContext);
 
   const [cookies, setCookie] = useCookies(["cart"]);
 
@@ -32,33 +32,43 @@ export const CartContextProvider = ({ children }) => {
     loadCartData();
   }, []);
 
-  useEffect(() => {
-    // Do something with the updated isAuth value
-    console.log(`isAuth value updated to: ${isAuth}`);
-  }, [isAuth]);
+  // useEffect(() => {
+  // Do something with the updated isAuth value
+  // console.log(`isAuth value updated to: ${isAuth}`);
+  // }, [isAuth]);
 
   useEffect(() => {
     async function updateCartData(cartData) {
       // await login();
-      console.log(isAuth);
-      if (isAuth) {
-        // Update cart data on the server
-        console.log("auth yes updateCart");
-        try {
-          await axios.post("auth/user/add-cart", {
-            cart: cartData,
-          });
-        } catch (err) {
-          console.error("Failed to update cart data on server", err);
+      // console.log(isAuth);
+      // if (isAuth) {
+      //   // Update cart data on the server
+      //   console.log("auth yes updateCart");
+      //   try {
+      //     await axios.post("auth/user/add-cart", {
+      //       cart: cartData,
+      //     });
+      //   } catch (err) {
+      //     console.error("Failed to update cart data on server", err);
+      //   }
+      // } else {
+      //   // Write cart data to cookie
+      //   console.log("auth no write cart to cookie");
+      //   setCookie("cart", cartData, { path: "/" });
+      // }
+      try {
+        const response = await axios.post("/auth/user/add-cart", {
+          cart: cartData,
+        });
+        if (response.status === 500) {
+          setCookie("cart", cartData, { path: "/" });
         }
-      } else {
-        // Write cart data to cookie
-        console.log("auth no write cart to cookie");
-        setCookie("cart", cartData, { path: "/" });
+      } catch (err) {
+        console.error("Failed to update cart data", err);
       }
     }
     updateCartData(cartItems);
-  }, [cartItems, isAuth, setCookie]);
+  }, [cartItems, setCookie]);
 
   function addToCart(item) {
     console.log("add");
@@ -114,18 +124,25 @@ export const CartContextProvider = ({ children }) => {
   // }
 
   async function getCartData() {
-    const userId = userInfo?._id;
+    // const userId = userInfo?._id;
     try {
       // Wait for login to complete before making the get-cart request
       // await login();
-      console.log(isAuth);
-      if (isAuth) {
-        console.log("auth yes getcartdata");
-        const response = await axios.get("/auth/user/get-cart", { userId });
-        return response;
+      // console.log(isAuth);
+      // if (isAuth) {
+      //   console.log("auth yes getcartdata");
+      //   const response = await axios.get("/auth/user/get-cart", { userId });
+      //   return response;
+      // } else {
+      //   console.log("auth no getcartdata");
+      //   return cookies.cart;
+      // }
+      const response = await axios.get("auth/user/get-cart");
+      if (response.status === 500) {
+        return cookies.cart || [];
       } else {
-        console.log("auth no getcartdata");
-        return cookies.cart;
+        console.log(response);
+        return response.data || [];
       }
     } catch (err) {
       console.error("Failed to load cart data from server", err);

@@ -7,6 +7,7 @@ import { BsFillCartFill } from "react-icons/bs";
 import Login from "./Login";
 import Register from "./Register";
 import Cart from "./order page sections/Cart";
+// import axios from "axios";
 import { CartContext } from "./CartContext";
 import AuthContext from "./AuthContext.jsx";
 
@@ -14,12 +15,34 @@ const OrderHeader = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  // const [userInfo, setUserInfo] = useState(null);
   const value = useContext(AuthContext);
   const { cartItems, clearCart } = useContext(CartContext);
+  const [quantity, setQuantity] = useState(0);
 
-  // useEffect(() => {
-  //   value.login();
-  // }, [value]);
+  useEffect(() => {
+    value.login();
+  }, [value]);
+  // useEffect(async () => {
+  //   try {
+  //     const user = await axios.get("/auth/user/user-data");
+  //     setUserInfo(user);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }, [userInfo]);
+
+  useEffect(() => {
+    if (Array.isArray(cartItems)) {
+      const quantity = cartItems.reduce((total, item) => {
+        return total + item.quantity;
+      }, 0);
+      setQuantity(quantity);
+      console.log(quantity); // or do something with the quantity
+    } else {
+      console.log("cartItems is not an array");
+    }
+  }, [cartItems]);
 
   const handleClosePopup = () => {
     setShowLogin(false);
@@ -38,6 +61,15 @@ const OrderHeader = () => {
     setShowLogin(true);
     setShowRegister(false);
   };
+
+  // const logout = async () => {
+  //   try {
+  //     const response = await axios.post("/auth/user/logout");
+  //     alert(response.data.message);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <div className={styles.header_container}>
@@ -64,6 +96,7 @@ const OrderHeader = () => {
               {value.userInfo ? <p>{value.userInfo?.name}</p> : ""}
               <button
                 onClick={() => {
+                  // logout();
                   value.logout();
                   clearCart();
                 }}
@@ -81,9 +114,10 @@ const OrderHeader = () => {
             }}
           >
             <BsFillCartFill />
-            {cartItems?.reduce((total, item) => {
+            {/* {cartItems.reduce((total, item) => {
               return total + item.quantity;
-            }, 0)}
+            }, 0)} */}
+            {quantity}
           </button>
         </div>
       </div>

@@ -105,7 +105,7 @@ router.get('/get-cart', authenticateJWT, async (req, res) => {
 //   const {userId} = req.body;
    try {
      const user = await UserModel.findOne({ id: req.userId }).populate('cart.itemId'); // Find the user's cart and populate the `itemId` field with data from the `MenuItem` model
-     res.json(user.cart);
+     res.json(user?.cart);
    } catch (error) {
      console.error(error);
      res.status(500).json({ message: 'Error retrieving cart' });

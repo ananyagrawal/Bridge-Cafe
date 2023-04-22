@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
       console.log("check auth");
       if (!isAuth) {
         // check if user is not already authenticated
-        const response = await axios.post("/auth/user/current-user");
+        const response = await axios.get("/auth/user/user-data");
         if (response.data.message !== "Invalid token") {
           console.log("setAuth true");
           setIsAuth(true);
@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
         }
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
