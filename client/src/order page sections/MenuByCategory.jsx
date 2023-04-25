@@ -2,52 +2,25 @@ import { useState, useContext } from "react";
 import styles from "./MenuByCategory.module.css";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import AuthContext from "../AuthContext";
 import { CartContext } from "../CartContext";
 
 const MenuByCategory = ({ category }) => {
-  const [itemAdded, setItemAdded] = useState(false);
-  // const [itemIndex, setItemIndex] = useState(null);
-  // const [quantity, setQuantity] = useState(1);
-  // const [cart, setCart] = useState([]);
-
   const { data: menuData } = useQuery(["menu"], async () => {
     const response = await axios.get("/api/menu");
     return response.data;
   });
 
-  const value = useContext(AuthContext);
+  const [itemAdded, setItemAdded] = useState(false);
 
-  const { setCartProducts } = useContext(CartContext);
-  // useEffect(() => {
-  //   const data = JSON.parse(localStorage.getItem("cart")) || [];
-  //   setCart(data);
-  // }, []);
+  const { addToCart } = useContext(CartContext);
 
   const menuItems = menuData?.filter((item) => item.category === category);
 
-  const handleAddButton = async (item) => {
-    // const userId = window.localStorage.getItem("userId");
-    const itemId = item._id;
-    const userId = value?.userInfo?._id;
-    if (value.isAuth) {
-      try {
-        axios.post("/api/cart", { userId, itemId });
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    // else {
-    //   const cartItem = {
-    //     item: itemId,
-    //   };
-    //   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    //   cart.push(cartItem);
-    //   localStorage.setItem("cart", JSON.stringify(cart));
-    // }
+  function callAddMessage() {
     setItemAdded(true);
     setTimeout(() => setItemAdded(false), 3000);
-  };
+  }
+
   return (
     <div>
       <h2 className={styles.menu_category_heading}>{category}</h2>
@@ -64,7 +37,8 @@ const MenuByCategory = ({ category }) => {
                     <p className={styles.item_price}>Rs. {item.price}</p>
                     <button
                       onClick={() => {
-                        handleAddButton(item);
+                        addToCart(item);
+                        callAddMessage();
                       }}
                       className={styles.add_button}
                     >

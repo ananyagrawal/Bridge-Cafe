@@ -1,7 +1,6 @@
 import styles from "./Login.module.css";
 import { Link } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
-// import { useCookies } from "react-cookie";
 import { useState, useContext } from "react";
 import AuthContext from "./AuthContext";
 import axios from "axios";
@@ -12,7 +11,6 @@ const Login = (props) => {
   const [passwordError, setPasswordError] = useState("");
 
   const value = useContext(AuthContext);
-  // const [_, setCookies] = useCookies(["access_token"]);
 
   const handleEmailOrPhoneBlur = () => {
     if (emailOrPhone && !isValidEmailOrPhone(emailOrPhone)) {
@@ -60,15 +58,9 @@ const Login = (props) => {
         emailOrPhone,
         password,
       });
-      // if (!response.data.userId) {
-      //   alert(response.data.message);
-      // } else {
-      // setCookies("access_token", response.data.token);
-      // window.localStorage.setItem("userID", response.data.userId);
-      // await value.login();
+      await value.login();
       alert(response.data.message);
       props.onClose();
-      // }
     } catch (err) {
       console.log(err);
     }

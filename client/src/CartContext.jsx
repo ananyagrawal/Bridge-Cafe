@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect } from "react";
-// import AuthContext from "./AuthContext.jsx";
+import { createContext, useState, useEffect, useContext } from "react";
+import AuthContext from "./AuthContext.jsx";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 export const CartContext = createContext({
@@ -7,87 +7,98 @@ export const CartContext = createContext({
   addToCart: () => {},
   removeFromCart: () => {},
   clearCart: () => {},
-  // updateCartItem: () => {}
 });
 
 export const CartContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  // const { isAuth, userInfo } = useContext(AuthContext);
+  const { isAuth, userInfo } = useContext(AuthContext);
 
   const [cookies, setCookie] = useCookies(["cart"]);
 
   useEffect(() => {
     async function loadCartData() {
-      // await login();
       try {
-        console.log("loadCartData");
+        console.log("loadCartData on mount");
         const data = await getCartData();
         setCartItems(data);
       } catch (err) {
         console.error("Failed to load cart data", err);
       }
     }
-
     loadCartData();
   }, []);
 
-  // useEffect(() => {
-  // Do something with the updated isAuth value
-  // console.log(`isAuth value updated to: ${isAuth}`);
-  // }, [isAuth]);
-
   useEffect(() => {
-    async function updateCartData(cartData) {
-      // await login();
-      // console.log(isAuth);
-      // if (isAuth) {
-      //   // Update cart data on the server
-      //   console.log("auth yes updateCart");
-      //   try {
-      //     await axios.post("auth/user/add-cart", {
-      //       cart: cartData,
-      //     });
-      //   } catch (err) {
-      //     console.error("Failed to update cart data on server", err);
-      //   }
-      // } else {
-      //   // Write cart data to cookie
-      //   console.log("auth no write cart to cookie");
-      //   setCookie("cart", cartData, { path: "/" });
-      // }
+    const changeSomething = async () => {
       try {
-        const response = await axios.post("/auth/user/add-cart", {
-          cart: cartData,
-        });
-        if (response.status === 500) {
-          setCookie("cart", cartData, { path: "/" });
+        console.log("get cart data on auth change");
+        let cartData = await getCartData();
+        if (cookies.cart && cookies.cart.length > 0) {
+          cartData = mergeCarts(cartData, cookies.cart);
+          setCookie("cart", [], { path: "/" });
+        }
+        setCartItems(cartData);
+        if (isAuth) {
+          setCartInServer(cartData);
         }
       } catch (err) {
-        console.error("Failed to update cart data", err);
+        console.error("Failed to load cart data", err);
       }
-    }
-    updateCartData(cartItems);
-  }, [cartItems, setCookie]);
+    };
+    changeSomething();
+  }, [isAuth]);
+
+  function mergeCarts(serverCart, cookieCart) {
+    const mergedCart = [...serverCart];
+    cookieCart.forEach((cookieItem) => {
+      const existingItemIndex = mergedCart.findIndex(
+        (cartItem) => cartItem.itemId === cookieItem.itemId
+      );
+      if (existingItemIndex >= 0) {
+        mergedCart[existingItemIndex].quantity += cookieItem.quantity;
+      } else {
+        mergedCart.push(cookieItem);
+      }
+    });
+    return mergedCart;
+  }
 
   function addToCart(item) {
-    console.log("add");
+    console.log("add", item);
     setCartItems((prevItems) => {
+      const updatedItems = [...prevItems];
       const existingItemIndex = prevItems.findIndex(
         (cartItem) => cartItem.itemId === item._id
       );
       if (existingItemIndex >= 0) {
-        const updatedItems = [...prevItems];
         updatedItems[existingItemIndex].quantity += 1;
-        return updatedItems;
       } else {
         const newItem = {
           itemId: item._id,
           quantity: 1,
         };
-        return [...prevItems, newItem];
+        updatedItems.push(newItem);
       }
+      console.log(updatedItems);
+      if (isAuth) {
+        setCartInServer(updatedItems);
+      } else {
+        setCookie("cart", updatedItems, { path: "/" });
+      }
+      return updatedItems;
     });
+  }
+
+  async function setCartInServer(cartData) {
+    try {
+      console.log("setCartInServer", cartData);
+      await axios.post("/auth/user/add-cart", {
+        cart: cartData,
+      });
+    } catch (err) {
+      console.error("Failed to update cart data on server", err);
+    }
   }
 
   function removeFromCart(itemId) {
@@ -106,43 +117,13 @@ export const CartContextProvider = ({ children }) => {
     }
   }
 
-  // async function getCartData() {
-  //   const userId = userInfo?._id;
-  //   if (isAuth) {
-  //     console.log("auth yes getCartData");
-  //     try {
-  //       const response = await axios.get("/auth/user/get-cart", { userId });
-  //       return response;
-  //     } catch (err) {
-  //       console.error("Failed to load cart data from server", err);
-  //     }
-  //   } else {
-  //     console.log("auth no getCartData");
-  //     return cookies.cart;
-  //   }
-  //   return [];
-  // }
-
   async function getCartData() {
-    // const userId = userInfo?._id;
     try {
-      // Wait for login to complete before making the get-cart request
-      // await login();
-      // console.log(isAuth);
-      // if (isAuth) {
-      //   console.log("auth yes getcartdata");
-      //   const response = await axios.get("/auth/user/get-cart", { userId });
-      //   return response;
-      // } else {
-      //   console.log("auth no getcartdata");
-      //   return cookies.cart;
-      // }
-      const response = await axios.get("auth/user/get-cart");
-      if (response.status === 500) {
-        return cookies.cart || [];
+      console.log("Fetching cart data when auth is", isAuth);
+      if (isAuth) {
+        return userInfo.cart || [];
       } else {
-        console.log(response);
-        return response.data || [];
+        return cookies.cart || [];
       }
     } catch (err) {
       console.error("Failed to load cart data from server", err);
@@ -152,7 +133,7 @@ export const CartContextProvider = ({ children }) => {
 
   function clearCart() {
     console.log("clearcart");
-    setCartItems([]);
+    // setCartItems([]);
   }
 
   return (

@@ -1,7 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import cookieParser from "cookie-parser";
+// import cookieParser from "cookie-parser";
 import { UserModel } from "../models/Users.js";
 
 const router = express.Router();
@@ -88,9 +88,11 @@ const authenticateJWT = (req, res, next) => {
   });
   
 
- router.post('/add-cart', authenticateJWT,  async(req,res) => {
+ router.post('/add-cart', authenticateJWT, async(req,res) => {
     const {cart} = req.body;
+    console.log(req.userId)
    try{
+       console.log(cart);
        const user = await UserModel.findOneAndUpdate({_id: req.userId}, {cart}, {upsert: true}).populate('cart.itemId');
        res.json(user)
    } catch (error) {
@@ -104,8 +106,9 @@ router.get('/get-cart', authenticateJWT, async (req, res) => {
    // If the user is logged in, get their user ID from the request object
 //   const {userId} = req.body;
    try {
-     const user = await UserModel.findOne({ id: req.userId }).populate('cart.itemId'); // Find the user's cart and populate the `itemId` field with data from the `MenuItem` model
-     res.json(user?.cart);
+     const user = await UserModel.findOne({ _id: req.userId }).populate('cart.itemId'); // Find the user's cart and populate the `itemId` field with data from the `MenuItem` model
+     console.log(user)
+     res.json(user);
    } catch (error) {
      console.error(error);
      res.status(500).json({ message: 'Error retrieving cart' });

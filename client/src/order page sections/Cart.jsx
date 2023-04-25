@@ -1,7 +1,7 @@
 import styles from "./Cart.module.css";
 import { IoMdClose } from "react-icons/io";
-import { useContext } from "react";
 import { CartContext } from "../CartContext";
+import { useContext } from "react";
 const Cart = () => {
   const { cartItems, removeFromCart } = useContext(CartContext);
   return (
