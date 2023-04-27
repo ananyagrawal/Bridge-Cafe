@@ -165,6 +165,7 @@ export const CartContextProvider = ({ children }) => {
       const cartData = mergeCarts(cartItems, userInfo.cart);
       setCookie("cart", [], { path: "/" });
       setCartItems(cartData);
+      setCartInServer(cartData);
     }
     // else {
     //   setCartItems(cookies.cart);
@@ -173,7 +174,7 @@ export const CartContextProvider = ({ children }) => {
 
   function clearCart() {
     console.log("clearcart");
-    // setCartItems([]);
+    setCartItems([]);
   }
 
   return (
