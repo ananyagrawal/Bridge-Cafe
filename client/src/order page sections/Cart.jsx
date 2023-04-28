@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
 const Cart = () => {
-  const { cartItems, removeFromCart } = useContext(CartContext);
+  const { cartItems, removeFromCart, addToCart } = useContext(CartContext);
   const { data: menuData } = useQuery(["menu"], async () => {
     const response = await axios.get("/api/menu");
     return response.data;
@@ -29,29 +29,32 @@ const Cart = () => {
             <IoMdClose size={20} />
           </div>
         </div>
-        <div>
+        <div className={styles.middle_section}>
           {cartItems.map((cartItem) => {
             const item = menuDataMap.get(cartItem.itemId);
             return (
-              <div key={cartItem.itemId}>
-                <h4>{item.name}</h4>
-                <p>Price: {item.price}</p>
-                <p>Quantity: {cartItem.quantity}</p>
-                <button onClick={() => removeFromCart(cartItem.itemId)}>
-                  Remove
-                </button>
+              <div className={styles.item_container} key={cartItem.itemId}>
+                <div className={styles.item_left}>
+                  <h5>{item.name}</h5>
+                  <p>Customize</p>
+                </div>
+                <div className={styles.item_middle}>
+                  <button onClick={() => removeFromCart(cartItem.itemId)}>
+                    -
+                  </button>
+                  <p>{cartItem.quantity}</p>
+                  <button onClick={() => addToCart(cartItem)}>+</button>
+                </div>
+                <div className={styles.item_right}>
+                  <p>₹ {item.price}</p>
+                </div>
               </div>
             );
           })}
-          {/* {cartItems.map((item) => (
-            <div key={item.itemId}>
-              <p>{item.name}</p>
-              <p>{item.quantity}</p>
-              <button onClick={() => removeFromCart(item.itemId)}>
-                Remove
-              </button>
-            </div>
-          ))} */}
+          <div className={styles.checkout_btn}>
+            <p>Checkout</p>
+            <p>₹ 300</p>
+          </div>
         </div>
       </div>
     </div>
