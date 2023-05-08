@@ -30,7 +30,7 @@ const Cart = () => {
           </div>
         </div>
         <div className={styles.middle_section}>
-          {cartItems.map((cartItem) => {
+          {cartItems.map((cartItem, index) => {
             const item = menuDataMap.get(cartItem.itemId);
             return (
               <div key={cartItem.itemId}>
@@ -50,7 +50,9 @@ const Cart = () => {
                     <p>₹ {item?.price}</p>
                   </div>
                 </div>
-                <hr className={styles.break_line} />
+                {index !== cartItems.length - 1 && (
+                  <hr className={styles.break_line} />
+                )}
               </div>
             );
           })}
