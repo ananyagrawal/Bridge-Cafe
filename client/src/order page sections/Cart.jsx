@@ -33,21 +33,24 @@ const Cart = () => {
           {cartItems.map((cartItem) => {
             const item = menuDataMap.get(cartItem.itemId);
             return (
-              <div className={styles.item_container} key={cartItem.itemId}>
-                <div className={styles.item_left}>
-                  <h5>{item.name}</h5>
-                  <p>Customize</p>
+              <div key={cartItem.itemId}>
+                <div className={styles.item_container}>
+                  <div className={styles.item_left}>
+                    <h5>{item?.name}</h5>
+                    <p>Customize</p>
+                  </div>
+                  <div className={styles.item_middle}>
+                    <button onClick={() => removeFromCart(cartItem.itemId)}>
+                      -
+                    </button>
+                    <p>{cartItem.quantity}</p>
+                    <button onClick={() => addToCart(cartItem)}>+</button>
+                  </div>
+                  <div className={styles.item_right}>
+                    <p>₹ {item?.price}</p>
+                  </div>
                 </div>
-                <div className={styles.item_middle}>
-                  <button onClick={() => removeFromCart(cartItem.itemId)}>
-                    -
-                  </button>
-                  <p>{cartItem.quantity}</p>
-                  <button onClick={() => addToCart(cartItem)}>+</button>
-                </div>
-                <div className={styles.item_right}>
-                  <p>₹ {item.price}</p>
-                </div>
+                <hr className={styles.break_line} />
               </div>
             );
           })}
