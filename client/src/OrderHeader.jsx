@@ -94,7 +94,7 @@ const OrderHeader = () => {
       {showRegister && (
         <Register switchToLogin={switchToLogin} onClose={handleClosePopup} />
       )}
-      {showCart && <Cart />}
+      {showCart && <Cart showCart={showCart} setShowCart={setShowCart} />}
     </div>
   );
 };

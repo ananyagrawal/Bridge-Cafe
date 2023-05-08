@@ -4,17 +4,22 @@ import { CartContext } from "../CartContext";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
-const Cart = () => {
+const Cart = (props) => {
   const { cartItems, removeFromCart, addToCart } = useContext(CartContext);
   const { data: menuData } = useQuery(["menu"], async () => {
     const response = await axios.get("/api/menu");
     return response.data;
   });
+  const { showCart, setShowCart } = props;
+  const show = showCart;
   const menuDataMap = new Map(menuData.map((item) => [item._id, item]));
   console.log(menuDataMap);
   return (
-    <div className={styles.cart_container}>
-      <div className={styles.cart_content}>
+    <div
+      className={styles.cart_container}
+      style={{ display: show ? "flex" : "none" }}
+    >
+      <div className={`${styles.cart_content} ${show ? styles.slide_in : ""}`}>
         <div className={styles.top_section}>
           <div className={styles.top_section_left}>
             <h1>YOUR ORDER</h1>
@@ -26,7 +31,13 @@ const Cart = () => {
             </p>
           </div>
           <div className={styles.top_section_right}>
-            <IoMdClose size={20} />
+            <IoMdClose
+              size={20}
+              onClick={() => {
+                setShowCart(false);
+              }}
+              style={{ cursor: "pointer" }}
+            />
           </div>
         </div>
         <div className={styles.middle_section}>
