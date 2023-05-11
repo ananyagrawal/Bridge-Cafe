@@ -102,3 +102,7 @@
   font-size: 18px;
   font-family: "Source Sans Pro", sans-serif;
 }
+/* remove blue underline because of Link */
+.middle_section a {
+  text-decoration: none;
+}

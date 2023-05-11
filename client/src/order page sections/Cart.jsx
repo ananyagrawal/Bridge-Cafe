@@ -3,6 +3,7 @@ import { IoMdClose } from "react-icons/io";
 import { CartContext } from "../CartContext";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 const Cart = (props) => {
   const { cartItems, removeFromCart, addToCart } = useContext(CartContext);
@@ -67,10 +68,12 @@ const Cart = (props) => {
               </div>
             );
           })}
-          <div className={styles.checkout_btn}>
-            <p>Checkout</p>
-            <p>₹ 300</p>
-          </div>
+          <Link to="/checkout">
+            <div className={styles.checkout_btn}>
+              <p>Checkout</p>
+              <p>₹ 300</p>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

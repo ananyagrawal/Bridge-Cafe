@@ -42,7 +42,7 @@ const OrderHeader = () => {
   return (
     <div className={styles.header_container}>
       <Link to="/">
-        <img className={styles.cafe_logo} src={logo} alt="logo" />
+        <img className={styles.cafe_logo} src={logo} alt="Divine Bridge Cafe" />
       </Link>
       <div className={styles.right_section}>
         <div className={styles.profile_container}>

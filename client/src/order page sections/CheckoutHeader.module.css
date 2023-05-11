@@ -1,0 +1,30 @@
+.header_container {
+  background-color: #296159;
+  color: white;
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2.5rem;
+  top: 0;
+  z-index: 1;
+}
+.cafe_logo {
+  width: 130px;
+  height: 65px;
+}
+.profile_container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  margin: 0 2vw;
+}
+.person {
+  background-color: #dacfc0;
+  color: #296159;
+  padding: 4px;
+  border-radius: 50%;
+}

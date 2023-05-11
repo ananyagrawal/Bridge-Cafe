@@ -5,6 +5,7 @@ import Order from "./Order";
 import Book from "./Book";
 import Inquiry from "./Inquiry";
 import Contact from "./Contact";
+import Checkout from "./order page sections/Checkout";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/book-table" element={<Book />} />
             <Route path="/event-inquiry" element={<Inquiry />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </QueryClientProvider>
       </BrowserRouter>
