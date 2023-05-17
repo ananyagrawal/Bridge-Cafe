@@ -1,14 +1,14 @@
 import styles from "./OrderHeader.module.css";
 import { Link } from "react-router-dom";
-import logo from "./assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 import { useState, useContext, useEffect } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BsFillCartFill } from "react-icons/bs";
-import Login from "./Login";
-import Register from "./Register";
-import Cart from "./order page sections/Cart";
-import { CartContext } from "./CartContext";
-import AuthContext from "./AuthContext.jsx";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
+import Cart from "../Order/Cart";
+import { CartContext } from "../../context/CartContext.jsx";
+import AuthContext from "../../context/AuthContext.jsx";
 
 const OrderHeader = () => {
   const [showLogin, setShowLogin] = useState(false);

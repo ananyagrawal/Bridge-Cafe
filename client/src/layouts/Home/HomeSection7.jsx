@@ -1,5 +1,5 @@
 import styles from "./Section7.module.css";
-import map from "../assets/images/map.png";
+import map from "../../assets/images/map.png";
 import { Link } from "react-router-dom";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookF } from "react-icons/fa";

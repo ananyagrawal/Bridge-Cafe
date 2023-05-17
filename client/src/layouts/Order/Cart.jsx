@@ -1,6 +1,6 @@
 import styles from "./Cart.module.css";
 import { IoMdClose } from "react-icons/io";
-import { CartContext } from "../CartContext";
+import { CartContext } from "../../context/CartContext.jsx";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";

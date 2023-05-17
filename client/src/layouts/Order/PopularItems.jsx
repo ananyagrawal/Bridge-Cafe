@@ -2,7 +2,7 @@ import styles from "./PopularItems.module.css";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
-import { CartContext } from "../CartContext";
+import { CartContext } from "../../context/CartContext";
 const PopularItems = () => {
   const { data: menuData } = useQuery(["menu"], async () => {
     const response = await axios.get("/api/menu");

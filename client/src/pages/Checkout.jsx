@@ -1,5 +1,4 @@
-import styles from "./Checkout.module.css";
-import CheckoutHeader from "./CheckoutHeader.jsx";
+import CheckoutHeader from "../layouts/Header/CheckoutHeader.jsx";
 export default function Checkout() {
   return (
     <div>

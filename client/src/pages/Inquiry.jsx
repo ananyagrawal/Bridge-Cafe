@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header";
-import FormHeading from "./Form/FormHeading";
-import Form from "./Form/Form";
+import Header from "../layouts/Header/Header";
+import FormHeading from "../layouts/Form/FormHeading";
+import Form from "../layouts/Form/Form";
 const Inquiry = () => {
   return (
     <div className="inquiry_page_container">

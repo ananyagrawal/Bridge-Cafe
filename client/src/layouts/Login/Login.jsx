@@ -2,7 +2,7 @@ import styles from "./Login.module.css";
 import { Link } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import { useState, useContext } from "react";
-import AuthContext from "./AuthContext";
+import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 const Login = (props) => {
   const [emailOrPhone, setEmailOrPhone] = useState("");

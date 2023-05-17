@@ -1,7 +1,7 @@
-import FormField from "./Form/FormField";
-import useForm from "./Hooks/useForm";
-import Header from "./Header.jsx";
-import FormHeading from "./Form/FormHeading";
+import FormField from "../layouts/Form/FormField";
+import useForm from "../hooks/useForm";
+import Header from "../layouts/Header/Header.jsx";
+import FormHeading from "../layouts/Form/FormHeading";
 const Book = () => {
   const { formData, errors, handleChange, handleSubmit, handleBlur } =
     useForm();

@@ -1,10 +1,10 @@
 import React from "react";
-import OrderHeader from "./OrderHeader.jsx";
-import AddressSection from "./order page sections/AddressSection";
-import PopularItems from "./order page sections/PopularItems";
-import Menu from "./order page sections/Menu";
-import { AuthContextProvider } from "./AuthContext.jsx";
-import { CartContextProvider } from "./CartContext.jsx";
+import OrderHeader from "../layouts/Header/OrderHeader.jsx";
+import AddressSection from "../layouts/Order/AddressSection.jsx";
+import PopularItems from "../layouts/Order/PopularItems.jsx";
+import Menu from "../layouts/Order/Menu.jsx";
+import { AuthContextProvider } from "../context/AuthContext.jsx";
+import { CartContextProvider } from "../context/CartContext.jsx";
 const Order = () => {
   return (
     <div>

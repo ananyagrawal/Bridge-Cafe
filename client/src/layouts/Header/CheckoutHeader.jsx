@@ -1,6 +1,6 @@
 import styles from "./CheckoutHeader.module.css";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 import { BsFillPersonFill } from "react-icons/bs";
 
 const CheckoutHeader = () => {

@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header.jsx";
-import FormHeading from "./Form/FormHeading.jsx";
-import Form from "./Form/Form.jsx";
+import Header from "../layouts/Header/Header.jsx";
+import FormHeading from "../layouts/Form/FormHeading.jsx";
+import Form from "../layouts/Form/Form.jsx";
 const Contact = () => {
   return (
     <div className="contact_page_container">

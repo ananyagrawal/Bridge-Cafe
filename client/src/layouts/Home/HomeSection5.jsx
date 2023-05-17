@@ -1,4 +1,4 @@
-import review from "../reviewData.json";
+import review from "../../reviewData.json";
 import { BsArrowLeft } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
 import { FaQuoteLeft } from "react-icons/fa";

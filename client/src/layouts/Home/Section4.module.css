@@ -14,14 +14,14 @@
   flex-direction: column;
 }
 .section_sub_container:nth-child(1) {
-  background-image: url("../assets/images/blog1.jpg");
+  background-image: url("../../assets/images/blog1.jpg");
 }
 .section_sub_container:nth-child(2) {
-  background-image: url("../assets/images/blog2.jpg");
+  background-image: url("../../assets/images/blog2.jpg");
   justify-content: flex-end;
 }
 .section_sub_container:nth-child(3) {
-  background-image: url("../assets/images/blog3.jpg");
+  background-image: url("../../assets/images/blog3.jpg");
 }
 .text_container {
   height: 100px;

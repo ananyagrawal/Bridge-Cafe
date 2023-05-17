@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import styles from "./MenuByCategory.module.css";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { CartContext } from "../CartContext";
+import { CartContext } from "../../context/CartContext";
 
 const MenuByCategory = ({ category }) => {
   const { data: menuData } = useQuery(["menu"], async () => {
