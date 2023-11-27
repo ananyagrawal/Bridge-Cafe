@@ -1,1 +1,2 @@
-/api/menu https://bridge-cafe.onrender.com/menu
+/api/* https://bridge-cafe.onrender.com/menu 200
+/auth/* https://bridge-cafe.onrender.com/* 201
