@@ -8,7 +8,7 @@ const Menu = () => {
   const [categories, setCategories] = useState(new Set());
 
   const { data: menuData } = useQuery(["menu"], async () => {
-    const response = await axios.get("/api/menu");
+    const response = await axios.get(`${process.env.VITE_BASE_URL}/menu`);
     return response.data;
   });
 
