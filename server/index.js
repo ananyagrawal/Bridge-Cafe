@@ -41,4 +41,7 @@ app.use((err, req, res, next) => {
 
 // listen for requests
 const PORT = process.env.PORT;
+app.get("/", (req,res) => {
+  return res.status(200).send('Hello world');
+})
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
