@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 const PopularItems = () => {
   const { data: menuData } = useQuery(["menu"], async () => {
-    const response = await axios.get("https://bridge-cafe.onrender.com/menu");
+    const response = await axios.get("api/menu");
     return response.data;
   });
 

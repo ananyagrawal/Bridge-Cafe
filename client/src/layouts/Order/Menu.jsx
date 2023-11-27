@@ -8,7 +8,7 @@ const Menu = () => {
   const [categories, setCategories] = useState(new Set());
 
   const { data: menuData } = useQuery(["menu"], async () => {
-    const response = await axios.get("https://bridge-cafe.onrender.com/menu");
+    const response = await axios.get("api/menu");
     return response.data;
   });
 
