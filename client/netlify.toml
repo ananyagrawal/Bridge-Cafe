@@ -5,6 +5,12 @@
   force = true
 
 [[redirects]]
+  from = "/auth/*"
+  to = "https://bridge-cafe.onrender.com/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
