@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const useForm = () => {
+export const useForm = () => {
   //Form formData
   const [formData, setFormData] = useState({
     firstName: "",
@@ -167,4 +167,4 @@ const useForm = () => {
   return { formData, errors, handleChange, handleSubmit, handleBlur };
 };
 
-export default useForm;
+// export default useForm;
