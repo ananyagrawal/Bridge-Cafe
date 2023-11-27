@@ -8,13 +8,13 @@ export default defineConfig({
     proxy: {
       "/api": {
         // target: process.env.VITE_BASE_URL,
-        target: "http://localhost:1337",
+        target: "https://bridge-cafe.onrender.com/",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace("/api", ""),
       },
       "/auth": {
-        target: "http://localhost:1337",
+        target: "https://bridge-cafe.onrender.com/",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace("/auth", ""),
