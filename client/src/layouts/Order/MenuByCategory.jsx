@@ -6,7 +6,7 @@ import { CartContext } from "../../context/CartContext";
 
 const MenuByCategory = ({ category }) => {
   const { data: menuData } = useQuery(["menu"], async () => {
-    const response = await axios.get("/api/menu");
+    const response = await axios.get("https://bridge-cafe.onrender.com/menu");
     return response.data;
   });
 
