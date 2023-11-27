@@ -33,8 +33,8 @@ app.use("/menu", menuRouter);
 
 app.use("/cart", cartRouter);
 
-const cors = require('cors')
-app.use(cors());
+// const cors = require('cors')
+// app.use(cors());
 
 // error handling middleware
 app.use((err, req, res, next) => {
