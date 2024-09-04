@@ -4,17 +4,35 @@ import { CartContext } from "../../context/CartContext.jsx";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 const Cart = (props) => {
   const { cartItems, removeFromCart, addToCart } = useContext(CartContext);
   const { data: menuData } = useQuery(["menu"], async () => {
     const response = await axios.get("/api/menu");
     return response.data;
   });
+  const [cartTotal, setCartTotal] = useState(0);
   const { showCart, setShowCart } = props;
   const show = showCart;
   const menuDataMap = new Map(menuData.map((item) => [item._id, item]));
   console.log(menuDataMap);
+  useEffect(() => {
+    // cartItems.reduce((total, item) => {
+    //   setCartTotal((prev) => {
+    //     const item = menuDataMap.get(item._id);
+    //     return prev + item.price * item.quantity;
+    //   }
+    //   );
+    // }, 0)
+    let total = 0;
+    // console.log('here', cartItems);
+    cartItems.forEach((item) => {
+      const menuItem = menuDataMap.get(item.itemId);
+      // console.log(menuItem);
+      total += menuItem?.price * item?.quantity;
+    });
+    setCartTotal(total);
+  }, [cartItems]);
   return (
     <div
       className={styles.cart_container}
@@ -68,12 +86,20 @@ const Cart = (props) => {
               </div>
             );
           })}
-          <Link to="/checkout">
-            <div className={styles.checkout_btn}>
-              <p>Checkout</p>
-              <p>₹ 300</p>
-            </div>
-          </Link>
+          <div>
+            {cartItems.length == 0 ?
+              <div>
+                <p>No Items to Display</p>
+              </div> :
+
+              <Link to="/checkout">
+                <div className={styles.checkout_btn}>
+                  <p>Checkout</p>
+                  <p>₹ {cartTotal}</p>
+                </div>
+              </Link>
+            }
+          </div>
         </div>
       </div>
     </div>

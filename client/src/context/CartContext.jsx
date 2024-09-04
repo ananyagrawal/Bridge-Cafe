@@ -72,9 +72,11 @@ export const CartContextProvider = ({ children }) => {
     console.log("add", item);
     setCartItems((prevItems) => {
       const updatedItems = [...prevItems];
+      console.log(prevItems);
       const existingItemIndex = prevItems.findIndex(
-        (cartItem) => cartItem.itemId === item._id
+        (cartItem) => cartItem.itemId === item.itemId
       );
+      console.log(existingItemIndex);
       if (existingItemIndex >= 0) {
         updatedItems[existingItemIndex].quantity += 1;
       } else {
