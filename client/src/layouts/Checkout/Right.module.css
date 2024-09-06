@@ -1,3 +1,15 @@
 .right_container {
   width: 40%;
+  /* border-left: 1px solid #153A35; */
+  margin: 20px;
+  height: 100%;
+}
+.right_container h1 {
+  font-size: 20px;
+  color: #153A35;
+}
+.item_summary_container{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
 }

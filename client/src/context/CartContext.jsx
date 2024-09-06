@@ -94,6 +94,7 @@ export const CartContextProvider = ({ children }) => {
       }
       return updatedItems;
     });
+    console.log("add", cartItems);
   }
 
   async function setCartInServer(cartData) {

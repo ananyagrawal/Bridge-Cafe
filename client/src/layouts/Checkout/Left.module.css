@@ -1,3 +1,14 @@
 .left_container {
   width: 60%;
+  margin: 20px;
+}
+.backToStore {
+  margin: 0px 10px;
+  display: flex;
+  align-items: center;
+}
+.backToStore h1 {
+  margin-left: 6px;
+  font-size: 20px;
+  color: #153A35;
 }

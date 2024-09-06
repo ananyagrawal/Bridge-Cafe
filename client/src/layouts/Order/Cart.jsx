@@ -25,7 +25,7 @@ const Cart = (props) => {
     //   );
     // }, 0)
     let total = 0;
-    // console.log('here', cartItems);
+    console.log('here', cartItems);
     cartItems.forEach((item) => {
       const menuItem = menuDataMap.get(item.itemId);
       // console.log(menuItem);

@@ -6,6 +6,8 @@ import Book from "./pages/Book";
 import Inquiry from "./pages/Inquiry";
 import Contact from "./pages/Contact";
 import Checkout from "./pages/Checkout";
+import { CartContextProvider } from "./context/CartContext";  // Import the CartContextProvider
+import { AuthContextProvider } from "./context/AuthContext";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -14,19 +16,25 @@ const queryClient = new QueryClient({
     },
   },
 });
+
 function App() {
   return (
     <div className="app">
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/order-online" element={<Order />} />
-            <Route path="/book-table" element={<Book />} />
-            <Route path="/event-inquiry" element={<Inquiry />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/checkout" element={<Checkout />} />
-          </Routes>
+          {/* Wrap your app with CartContextProvider so that all routes have access to it */}
+          <AuthContextProvider>
+          <CartContextProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/order-online" element={<Order />} />
+              <Route path="/book-table" element={<Book />} />
+              <Route path="/event-inquiry" element={<Inquiry />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/checkout" element={<Checkout />} />
+            </Routes>
+          </CartContextProvider>
+          </AuthContextProvider>
         </QueryClientProvider>
       </BrowserRouter>
     </div>
