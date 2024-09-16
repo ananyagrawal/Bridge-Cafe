@@ -18,6 +18,7 @@ const FormField = (props) => {
         id={props.name}
         name={props.name}
         value={props.value}
+        placeholder={props.placeholder}
         onChange={props.onChange}
         min={minDate}
         onBlur={props.onBlur}

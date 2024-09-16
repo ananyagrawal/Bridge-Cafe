@@ -5,7 +5,7 @@ export default function Checkout() {
   return (
     <div>
       <CheckoutHeader />
-      <div style={{ display: "flex", marginTop: "80px"}}>
+      <div style={{ display: "flex", marginTop: "70px", overflow: "auto"}}>
         <Left />
         <hr style={{ border: "1px solid black"}} />
         <Right />

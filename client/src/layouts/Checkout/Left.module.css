@@ -1,6 +1,21 @@
 .left_container {
   width: 60%;
   margin: 20px;
+  height: fit-content;
+}
+.left_subcontainer {
+  margin: auto;
+  height: fit-content;
+  overflow-y:  auto;
+  /* padding-bottom: 20px; */
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 .backToStore {
   margin: 0px 10px;
@@ -11,4 +26,86 @@
   margin-left: 6px;
   font-size: 20px;
   color: #153A35;
+}
+.delivery_container, .payment_container {
+  margin: 10px 0;
+  padding: 18px;
+  background-color: #296159;
+  border-radius: 10px;
+}
+.payment_container {
+  margin: 20px 0px;
+  padding-bottom: 2em;
+  min-height: 23em;
+  /* overflow-y: auto; */
+}
+.delivery_subcontainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.delivery_heading, .payment_heading {
+  font-size: 20px;
+  color: white;
+  padding-bottom: 8px;
+}
+.address {
+  font-size: 16px;
+  color: white;
+}
+.change_btn, .confirm_order_btn {
+  border-radius: 2rem;
+  background-color: #e8522a;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: "Source Sans Pro", sans-serif;
+}
+.change_btn {
+  margin-top: 20px;
+}
+.confirm_order_btn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.payment_option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  color: white;
+  /* border-bottom: 1px solid white; */
+  margin: 0px 20%;
+  padding: 10px 4px;
+  cursor: pointer;
+}
+.payment_subcontainer hr{
+  border: 1px solid white;
+  width: 60%;
+  text-align: center;
+  margin: 0 auto;
+  /* display: flex; */
+
+}
+.payment_details{
+  margin: 0px 20%;
+  padding: 0% 4px;
+}
+.payment_details h4{
+  font-size: 14px;
+  color: white;
+  font-weight: 500;
+}
+.upi_options {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 8px;
+  font-size: 14px;
+  /* align-items: center; */
 }
