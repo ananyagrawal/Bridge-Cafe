@@ -213,7 +213,7 @@ const Left = () => {
                   <p>You have selected Cash on Delivery. Please be prepared with the exact amount.</p>
                   <div style={{ margin: "20px 0" }}>
                     <ReCAPTCHA
-                      sitekey="6LcsSkUqAAAAADXElUMe4mDn8dwqrddO3qoAlQRz" // Replace with your reCAPTCHA Site Key
+                      sitekey="6LcsSkUqAAAAAAvtqTKcm3Fjd2GOgtp5hdoEBqPX" // Replace with your reCAPTCHA Site Key
                       onChange={handleCaptchaChange}
                     />
                   </div>
