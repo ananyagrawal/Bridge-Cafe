@@ -5,7 +5,7 @@ import {MenuModel} from "../models/Menu.js"
 // Get all menu items
 router.get('/', async(req,res) => {
     try{
-        const menuItems = await MenuModel.find();
+        const menuItems = await MenuModel.find().lean();
         // console.log(menuItems);
         menuItems.forEach(item => {
             // console.log(item);
