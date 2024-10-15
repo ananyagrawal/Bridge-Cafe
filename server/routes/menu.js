@@ -9,10 +9,14 @@ router.get('/', async(req,res) => {
         // console.log(menuItems);
         menuItems.forEach(item => {
             // console.log(item);
-            const rawUrl = item.image.split("/d/");
-            const newUrl = rawUrl[1].split("/view");
-            const imageId = newUrl[0];
-            item.image = `https://drive.google.com/thumbnail?id=${imageId}`;
+            console.log("Problem with URL:", item.image);
+            if (item.image && typeof item.image === "string" && item.image.includes("/d/") && item.image.includes("/view")) {
+                // Your URL transformation logic
+                const rawUrl = item.image.split("/d/");
+                const newUrl = rawUrl[1].split("/view");
+                const imageId = newUrl[0];
+                item.image = `https://drive.google.com/thumbnail?id=${imageId}`;
+            }
         });
         res.json(menuItems);
     }
