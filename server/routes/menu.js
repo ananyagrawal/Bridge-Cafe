@@ -6,6 +6,14 @@ import {MenuModel} from "../models/Menu.js"
 router.get('/', async(req,res) => {
     try{
         const menuItems = await MenuModel.find();
+        // console.log(menuItems);
+        menuItems.forEach(item => {
+            // console.log(item);
+            const rawUrl = item.image.split("/d/");
+            const newUrl = rawUrl[1].split("/view");
+            const imageId = newUrl[0];
+            item.image = `https://drive.google.com/thumbnail?id=${imageId}`;
+        });
         res.json(menuItems);
     }
     catch(err) {

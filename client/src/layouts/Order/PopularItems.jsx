@@ -20,7 +20,7 @@ const PopularItems = () => {
         {menuItems?.map((item, index) => {
           return (
             <div className={styles.item_container} key={index}>
-              <img className={styles.item_image} src={item.image} alt=""></img>
+              <img className={styles.item_image} src={item?.image} alt=""></img>
               <div className={styles.item_content}>
                 <h4>{item.name}</h4>
                 <div className={styles.item_sub_container}>
