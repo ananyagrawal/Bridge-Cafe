@@ -94,6 +94,11 @@
   margin: 0px 20%;
   padding: 0% 4px;
 }
+.payment_details p {
+  font-size: 14px;
+  color: white;
+  /* font-weight: 500; */
+}
 .payment_details h4{
   font-size: 14px;
   color: white;
